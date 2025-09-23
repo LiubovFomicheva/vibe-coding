@@ -1,0 +1,321 @@
+/* Contact & Scheduling Styles */
+.contact-scheduling {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+  border: 2px solid #e3f2fd;
+}
+
+/* Contact Header */
+.contact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.contact-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.person-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0071CE, #6666CC);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.person-info h4 {
+  margin: 0 0 4px 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.person-info p {
+  margin: 0 0 2px 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.person-contact {
+  font-family: monospace;
+  font-size: 0.85rem !important;
+  color: #0071CE !important;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Contact Options */
+.contact-options {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 16px;
+  border: 1px solid #ddd;
+}
+
+/* Quick Templates */
+.quick-templates {
+  margin-bottom: 24px;
+}
+
+.quick-templates h5 {
+  margin: 0 0 12px 0;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.section-icon {
+  font-size: 1.1rem;
+}
+
+.template-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.template-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid #e0e6ed;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.template-btn:hover {
+  border-color: #0071CE;
+  background: #f8f9fa;
+  transform: translateY(-1px);
+}
+
+.template-btn.intro {
+  border-left: 4px solid #28a745;
+}
+
+.template-btn.meeting {
+  border-left: 4px solid #0071CE;
+}
+
+.template-btn.check-in {
+  border-left: 4px solid #ffc107;
+}
+
+.template-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.template-info {
+  flex: 1;
+}
+
+.template-info strong {
+  display: block;
+  color: #333;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.template-info small {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+/* Custom Message */
+.custom-message {
+  border-top: 1px solid #e0e6ed;
+  padding-top: 20px;
+}
+
+.custom-message h5 {
+  margin: 0 0 12px 0;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.message-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  margin-bottom: 12px;
+}
+
+.message-textarea:focus {
+  outline: none;
+  border-color: #0071CE;
+  box-shadow: 0 0 0 3px rgba(0, 113, 206, 0.1);
+}
+
+.custom-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* Contact Tips */
+.contact-tips {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e6ed;
+}
+
+.tip-section h6 {
+  margin: 0 0 8px 0;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.tip-icon {
+  font-size: 1rem;
+}
+
+.tips-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #666;
+}
+
+.tips-list li {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Button Styles */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+.btn-primary {
+  background: #0071CE;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #005ba3;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-icon {
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .contact-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+  
+  .contact-actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .template-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .custom-actions {
+    flex-direction: column;
+  }
+  
+  .custom-actions .btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-scheduling {
+    padding: 16px;
+  }
+  
+  .contact-options {
+    padding: 16px;
+  }
+  
+  .template-btn {
+    padding: 12px;
+  }
+  
+  .template-icon {
+    font-size: 1.3rem;
+  }
+  
+  .template-info strong {
+    font-size: 0.9rem;
+  }
+  
+  .template-info small {
+    font-size: 0.75rem;
+  }
+}

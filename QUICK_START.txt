@@ -1,0 +1,38 @@
+🚀 QUICK START BuddyMatch
+
+=== SIMPLE LAUNCH (RECOMMENDED) ===
+1. Double-click: start-backend.bat
+2. Double-click: start-frontend.bat (in new window)
+3. Wait 2-3 minutes for both to start
+
+=== MANUAL LAUNCH (Alternative) ===
+
+BACKEND Terminal 1:
+1. cd BuddyMatch.Api
+2. dotnet run
+3. Wait for: "Now listening on: http://localhost:5104"
+
+FRONTEND Terminal 2:
+1. cd BuddyMatch.Web
+2. npm install
+3. npm start
+4. Wait for: "Local: http://localhost:3000"
+
+=== ACCESS POINTS ===
+- 🌟 Main App: http://localhost:3000
+- 🔧 API Test: http://localhost:5104/api/employees
+- 📋 Test Page: demo.html (open in browser)
+
+=== SUCCESS INDICATORS ===
+✅ Backend: JSON data at http://localhost:5104/api/employees
+✅ Frontend: Beautiful page at http://localhost:3000
+
+=== DEMO USERS ===
+👔 HR: Sarah Johnson, Michael Chen
+🎯 Buddy Guides: Alex Rodriguez, Emily Watson  
+🌟 Newcomers: Anna Kowalski, Raj Patel
+
+=== TROUBLESHOOTING ===
+❌ Backend fails: Run "dotnet restore" in BuddyMatch.Api folder
+❌ Frontend fails: Run "npm install" in BuddyMatch.Web folder
+❌ Port conflicts: Kill processes and restart

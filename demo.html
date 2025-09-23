@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuddyMatch - Hackathon Demo 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0071CE, #6666CC, #9c27b0);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .demo-container {
+            max-width: 1000px;
+            text-align: center;
+            animation: slideUp 1s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .hackathon-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin-bottom: 1rem;
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .logo {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: logoSpin 20s linear infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes logoSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #fff, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hackathon-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .year-badge {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 0 10px;
+            display: inline-block;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #ffd700; }
+            to { box-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700; }
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .status-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+        
+        .status-card:hover::before {
+            animation: shine 1.5s ease-in-out;
+        }
+        
+        .status-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+        
+        .status-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .status-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-url {
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #fff, #f8f9fa);
+            color: #0071CE;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 15px;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #e3f2fd, #fff);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #0071CE, #1976d2);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #005ba3, #1565c0);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #6666CC, #7986cb);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, #5252b8, #6f79c5);
+        }
+        
+        .features {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 1rem;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .api-status {
+            margin-top: 1rem;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .status-checking { background: rgba(255, 193, 7, 0.3); }
+        .status-online { background: rgba(40, 167, 69, 0.3); }
+        .status-offline { background: rgba(220, 53, 69, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="hackathon-badge">🏆 HACKATHON <span class="year-badge">2025</span> SUBMISSION</div>
+        <div class="logo">🤝</div>
+        <h1>BuddyMatch</h1>
+        <p class="subtitle">AI-Powered Smart Onboarding Companion</p>
+        
+        <div class="hackathon-info">
+            <h3 style="margin-bottom: 10px;">🎯 Award-Winning Features</h3>
+            <p>Revolutionary employee onboarding with AI matching, gamification, and real-time analytics</p>
+        </div>
+        
+        <div class="status-grid">
+            <div class="status-card">
+                <div class="status-icon">⚡</div>
+                <div class="status-title">Backend API (.NET 9)</div>
+                <div class="status-url">http://localhost:5104</div>
+                <div id="api-status" class="api-status status-checking">🔄 Checking...</div>
+                <div id="api-stats" style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;"></div>
+            </div>
+            
+            <div class="status-card">
+                <div class="status-icon">🎨</div>
+                <div class="status-title">React Frontend (TypeScript)</div>
+                <div class="status-url">http://localhost:3000</div>
+                <div id="react-status" class="api-status status-checking">🔄 Starting...</div>
+                <div style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Modern UI/UX + EPAM Design</div>
+            </div>
+            
+            <div class="status-card">
+                <div class="status-icon">🤖</div>
+                <div class="status-title">AI Engine</div>
+                <div class="status-url">Smart Matching Algorithm</div>
+                <div class="api-status status-online">✅ Active</div>
+                <div style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Compatibility Scoring</div>
+            </div>
+        </div>
+        
+        <div style="margin: 30px 0;">
+            <a href="http://localhost:3000" class="btn btn-primary" target="_blank">
+                🚀 Launch BuddyMatch App
+            </a>
+            <a href="test-api.html" class="btn btn-secondary" target="_blank">
+                🔧 Technical Demo
+            </a>
+            <a href="http://localhost:5104/api/employees" class="btn" target="_blank">
+                📊 API Endpoints
+            </a>
+        </div>
+        
+        <div class="features">
+            <h3 style="text-align: center; margin-bottom: 1rem;">🚀 Innovation Highlights</h3>
+            <div class="feature-grid">
+                <div class="feature">
+                    <span class="feature-icon">🤖</span>
+                    <span>AI-Powered Matching</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎯</span>
+                    <span>Smart Compatibility Scoring</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🏆</span>
+                    <span>Gamification & Achievements</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">📊</span>
+                    <span>Real-time HR Analytics</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💬</span>
+                    <span>SignalR Live Messaging</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎨</span>
+                    <span>Modern EPAM UI</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🔧</span>
+                    <span>Enterprise Architecture</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <span>Instant API Response</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 15px; text-align: center;">
+                <h4 style="margin-bottom: 15px;">🎊 Demo Ready Features</h4>
+                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                    <div>✅ <strong>18 Employees</strong> (Mockaroo data)</div>
+                    <div>✅ <strong>8 Buddy Guides</strong> (Ready to mentor)</div>
+                    <div>✅ <strong>7 Newcomers</strong> (Need support)</div>
+                    <div>✅ <strong>3 HR Users</strong> (System admins)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Check API status and load stats
+        async function checkAPI() {
+            try {
+                const [employeesResponse, buddyGuidesResponse, newcomersResponse] = await Promise.all([
+                    fetch('http://localhost:5104/api/employees'),
+                    fetch('http://localhost:5104/api/employees/buddy-guides'),
+                    fetch('http://localhost:5104/api/employees/newcomers')
+                ]);
+                
+                if (employeesResponse.ok && buddyGuidesResponse.ok && newcomersResponse.ok) {
+                    const [employees, buddyGuides, newcomers] = await Promise.all([
+                        employeesResponse.json(),
+                        buddyGuidesResponse.json(),
+                        newcomersResponse.json()
+                    ]);
+                    
+                    document.getElementById('api-status').textContent = '✅ Backend Online';
+                    document.getElementById('api-status').className = 'api-status status-online';
+                    
+                    const statsHtml = `
+                        📊 ${employees.length} employees | 
+                        🎯 ${buddyGuides.length} guides | 
+                        🌟 ${newcomers.length} newcomers
+                    `;
+                    document.getElementById('api-stats').innerHTML = statsHtml;
+                } else {
+                    throw new Error('API not responding properly');
+                }
+            } catch (error) {
+                document.getElementById('api-status').textContent = '❌ Backend Offline';
+                document.getElementById('api-status').className = 'api-status status-offline';
+                document.getElementById('api-stats').textContent = '🔧 Start backend: start-backend.bat';
+            }
+        }
+        
+        // Check React app status
+        async function checkReact() {
+            try {
+                const response = await fetch('http://localhost:3000');
+                if (response.ok) {
+                    document.getElementById('react-status').textContent = '✅ Frontend Ready';
+                    document.getElementById('react-status').className = 'api-status status-online';
+                } else {
+                    throw new Error('React app not ready');
+                }
+            } catch (error) {
+                document.getElementById('react-status').textContent = '⏳ Starting Frontend...';
+                document.getElementById('react-status').className = 'api-status status-checking';
+                // Retry in 5 seconds
+                setTimeout(checkReact, 5000);
+            }
+        }
+        
+        // Add some visual effects
+        function addSparkles() {
+            const container = document.querySelector('.demo-container');
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.style.cssText = `
+                        position: absolute;
+                        top: ${Math.random() * 100}%;
+                        left: ${Math.random() * 100}%;
+                        width: 4px;
+                        height: 4px;
+                        background: white;
+                        border-radius: 50%;
+                        animation: sparkle 2s ease-out forwards;
+                        pointer-events: none;
+                        z-index: 1000;
+                    `;
+                    container.appendChild(sparkle);
+                    
+                    setTimeout(() => sparkle.remove(), 2000);
+                }, i * 200);
+            }
+        }
+        
+        // Add sparkle animation
+        const sparkleCSS = `
+            @keyframes sparkle {
+                0% { transform: scale(0) rotate(0deg); opacity: 1; }
+                50% { transform: scale(1) rotate(180deg); opacity: 1; }
+                100% { transform: scale(0) rotate(360deg); opacity: 0; }
+            }
+        `;
+        const style = document.createElement('style');
+        style.textContent = sparkleCSS;
+        document.head.appendChild(style);
+        
+        // Start checking
+        checkAPI();
+        setTimeout(checkReact, 3000); // Give React app time to start
+        
+        // Recheck every 10 seconds
+        setInterval(checkAPI, 10000);
+        
+        // Add sparkles every 8 seconds
+        setInterval(addSparkles, 8000);
+        setTimeout(addSparkles, 2000); // Initial sparkles
+    </script>
+</body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuddyMatch API Demo & Test</title>
+    <style>
+        body {
+            font-family: 'Source Sans Pro', Arial, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #0071CE, #6666CC);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .status-bar {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #dc3545;
+            animation: pulse 2s infinite;
+        }
+        .status-indicator.connected {
+            background-color: #28a745;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #0071CE;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .btn {
+            background-color: #0071CE;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        .btn:hover { 
+            background-color: #005ba3; 
+            transform: translateY(-1px);
+        }
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-small { padding: 5px 10px; font-size: 0.8em; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-secondary:hover { background-color: #5a6268; }
+        .btn-success { background-color: #28a745; }
+        .btn-success:hover { background-color: #218838; }
+        .btn-warning { background-color: #ffc107; color: #212529; }
+        .btn-warning:hover { background-color: #e0a800; }
+        .btn-danger { background-color: #dc3545; }
+        .btn-danger:hover { background-color: #c82333; }
+        .result {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0071CE;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 0 5px 5px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .result.success {
+            border-left-color: #28a745;
+            background-color: #d4edda;
+        }
+        .result.error {
+            border-left-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        .result.loading {
+            border-left-color: #ffc107;
+            background-color: #fff3cd;
+        }
+        .result pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .input-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .demo-section {
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .demo-section h2 {
+            color: #1976d2;
+            margin-top: 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #0071CE;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .feature-highlight {
+            background: #fff9c4;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .feature-highlight h4 {
+            margin-top: 0;
+            color: #d68910;
+        }
+        .endpoint-info {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            font-size: 0.85em;
+            border-left: 3px solid #0071CE;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #0071CE;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤝 BuddyMatch API Demo</h1>
+        <div class="subtitle">Smart Onboarding Companion - Live API Testing & Integration Demo</div>
+    </div>
+
+    <div class="status-bar">
+        <div class="connection-status">
+            <div class="status-indicator" id="statusIndicator"></div>
+            <span id="connectionStatus">Checking connection...</span>
+        </div>
+        <div>
+            <button class="btn btn-small" onclick="checkAllEndpoints()">🔄 Test All Endpoints</button>
+            <button class="btn btn-small btn-secondary" onclick="clearAllResults()">🗑️ Clear Results</button>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>🚀 BuddyMatch Platform Overview</h2>
+        <p>BuddyMatch is an intelligent onboarding platform that pairs newcomers with experienced buddy guides using AI-powered matching algorithms. The platform includes gamification, real-time messaging, and comprehensive analytics for HR teams.</p>
+        
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalEmployees">-</div>
+                <div class="stat-label">Total Employees</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="buddyGuides">-</div>
+                <div class="stat-label">Buddy Guides</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="newcomers">-</div>
+                <div class="stat-label">Newcomers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="hrTeam">-</div>
+                <div class="stat-label">HR Team</div>
+            </div>
+        </div>
+
+        <div class="feature-highlight">
+            <h4>🎯 Key Features Demonstrated</h4>
+            <ul>
+                <li><strong>AI-Powered Matching:</strong> Smart compatibility scoring based on tech stack, location, and interests</li>
+                <li><strong>Gamification System:</strong> Points, badges, leaderboards to motivate buddy guides</li>
+                <li><strong>Real-time Messaging:</strong> SignalR-powered chat between buddies and newcomers</li>
+                <li><strong>HR Analytics:</strong> Comprehensive dashboards and performance metrics</li>
+                <li><strong>Automated Workflows:</strong> Match lifecycle management and notifications</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-grid">
+        <!-- Employee Management -->
+        <div class="test-section">
+            <h3>👥 Employee Management</h3>
+            <div class="endpoint-info">GET /api/employees</div>
+            <button class="btn" onclick="testEndpoint('employees', '/api/employees')">Get All Employees</button>
+            <button class="btn btn-secondary" onclick="testEndpoint('buddyGuides', '/api/employees/buddy-guides')">Get Buddy Guides</button>
+            <button class="btn btn-secondary" onclick="testEndpoint('newcomers', '/api/employees/newcomers')">Get Newcomers</button>
+            <button class="btn btn-warning" onclick="testEmployeeSearch()">Search Employees</button>
+            <div id="employees-result" class="result" style="display:none;"></div>
+            <div id="buddyGuides-result" class="result" style="display:none;"></div>
+            <div id="newcomers-result" class="result" style="display:none;"></div>
+            <div id="employeeSearch-result" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Buddy Profiles -->
+        <div class="test-section">
+            <h3>🎯 Buddy Profiles</h3>
+            <div class="endpoint-info">GET /api/buddies</div>
+            <button class="btn" onclick="testEndpoint('buddyProfiles', '/api/buddies')">Get All Buddy Profiles</button>
+            <button class="btn btn-secondary" onclick="testEndpoint('availableBuddies', '/api/buddies/available')">Get Available Buddies</button>
+            <div class="input-group">
+                <label>Employee ID for Buddy Profile:</label>
+                <input type="text" id="buddyEmployeeId" placeholder="Enter employee ID...">
+                <button class="btn btn-small" onclick="testBuddyByEmployee()">Get by Employee ID</button>
+            </div>
+            <div id="buddyProfiles-result" class="result" style="display:none;"></div>
+            <div id="availableBuddies-result" class="result" style="display:none;"></div>
+            <div id="buddyByEmployee-result" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Smart Matching -->
+        <div class="test-section">
+            <h3>🤖 AI Smart Matching</h3>
+            <div class="endpoint-info">GET /api/matching/recommendations/{newcomerId}</div>
+            <div class="input-group">
+                <label>Newcomer ID:</label>
+                <select id="newcomerSelect">
+                    <option value="">Select newcomer...</option>
+                </select>
+                <button class="btn btn-small" onclick="loadNewcomers()">🔄 Load Newcomers</button>
+            </div>
+            <button class="btn" onclick="testMatchRecommendations()">Get AI Recommendations</button>
+            <button class="btn btn-secondary" onclick="testCompatibilityScore()">Test Compatibility Score</button>
+            <div id="matchRecommendations-result" class="result" style="display:none;"></div>
+            <div id="compatibilityScore-result" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Match Management -->
+        <div class="test-section">
+            <h3>🤝 Match Management</h3>
+            <div class="endpoint-info">GET /api/matches</div>
+            <button class="btn" onclick="testEndpoint('allMatches', '/api/matches')">Get All Matches</button>
+            <button class="btn btn-secondary" onclick="testEndpoint('activeMatches', '/api/matches/active')">Active Matches</button>
+            <button class="btn btn-secondary" onclick="testEndpoint('pendingMatches', '/api/matches/pending')">Pending Matches</button>
+            <div class="input-group">
+                <label>Create New Match:</label>
+                <select id="matchBuddySelect">
+                    <option value="">Select buddy...</option>
+                </select>
+                <select id="matchNewcomerSelect">
+                    <option value="">Select newcomer...</option>
+                </select>
+                <button class="btn btn-success" onclick="createMatch()">Create Match</button>
+            </div>
+            <div id="allMatches-result" class="result" style="display:none;"></div>
+            <div id="activeMatches-result" class="result" style="display:none;"></div>
+            <div id="pendingMatches-result" class="result" style="display:none;"></div>
+            <div id="createMatch-result" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Messaging System -->
+        <div class="test-section">
+            <h3>💬 Messaging System</h3>
+            <div class="endpoint-info">GET /api/messaging/conversations/{userId}</div>
+            <div class="input-group">
+                <label>User ID for Conversations:</label>
+                <input type="text" id="conversationUserId" placeholder="Enter user ID...">
+                <button class="btn" onclick="testConversations()">Get Conversations</button>
+            </div>
+            <div class="input-group">
+                <label>Send Message:</label>
+                <input type="text" id="messageMatchId" placeholder="Match ID...">
+                <input type="text" id="messageReceiverId" placeholder="Receiver ID...">
+                <textarea id="messageContent" placeholder="Message content..."></textarea>
+                <button class="btn btn-success" onclick="sendMessage()">Send Message</button>
+            </div>
+            <div id="conversations-result" class="result" style="display:none;"></div>
+            <div id="sendMessage-result" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Gamification System -->
+        <div class="test-section">
+            <h3>🏆 Gamification & Achievements</h3>
+            <div class="endpoint-info">GET /api/gamification/leaderboard/monthly</div>
+            <button class="btn" onclick="testEndpoint('monthlyLeaderboard', '/api/gamification/leaderboard/monthly')">Monthly Leaderboard</button>
+            <button class="btn btn-secondary" onclick="testEndpoint('allTimeLeaderboard', '/api/gamification/leaderboard/all-time')">All-Time Leaderboard</button>
+            <button class="btn btn-warning" onclick="testEndpoint('risingStars', '/api/gamification/leaderboard/rising-stars')">Rising Stars</button>
+            <div class="input-group">
+                <label>Award Points:</label>
+                <input type="text" id="awardBuddyId" placeholder="Buddy ID...">
+                <select id="activityType">
+                    <option value="MatchAccept">Match Accept</option>
+                    <option value="SuccessfulCompletion">Successful Completion</option>
+                    <option value="MonthlyFeedback">Monthly Feedback</option>
+                    <option value="FiveStarRating">Five Star Rating</option>
+                </select>
+                <input type="number" id="pointsAmount" placeholder="Points amount..." value="50">
+                <button class="btn btn-success" onclick="awardPoints()">Award Points</button>
+            </div>
+            <div id="monthlyLeaderboard-result" class="result" style="display:none;"></div>
+            <div id="allTimeLeaderboard-result" class="result" style="display:none;"></div>
+            <div id="risingStars-result" class="result" style="display:none;"></div>
+            <div id="awardPoints-result" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Feedback System -->
+        <div class="test-section">
+            <h3>⭐ Feedback System</h3>
+            <div class="endpoint-info">GET /api/feedback/overall-stats</div>
+            <button class="btn" onclick="testEndpoint('overallFeedbackStats', '/api/feedback/overall-stats')">Overall Feedback Stats</button>
+            <div class="input-group">
+                <label>Submit Feedback:</label>
+                <input type="text" id="feedbackMatchId" placeholder="Match ID...">
+                <input type="text" id="feedbackNewcomerId" placeholder="Newcomer ID...">
+                <select id="feedbackRating">
+                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                    <option value="4">⭐⭐⭐⭐ Good</option>
+                    <option value="3">⭐⭐⭐ Average</option>
+                    <option value="2">⭐⭐ Poor</option>
+                    <option value="1">⭐ Very Poor</option>
+                </select>
+                <textarea id="feedbackComments" placeholder="Feedback comments..."></textarea>
+                <button class="btn btn-success" onclick="submitFeedback()">Submit Feedback</button>
+            </div>
+            <div id="overallFeedbackStats-result" class="result" style="display:none;"></div>
+            <div id="submitFeedback-result" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Analytics Dashboard -->
+        <div class="test-section">
+            <h3>📈 HR Analytics</h3>
+            <div class="endpoint-info">GET /api/analytics/dashboard</div>
+            <button class="btn" onclick="testEndpoint('analyticsDashboard', '/api/analytics/dashboard')">Get Dashboard Data</button>
+            <button class="btn btn-secondary" onclick="testEndpoint('matchingPerformance', '/api/analytics/matching-performance')">Matching Performance</button>
+            <button class="btn btn-secondary" onclick="testEndpoint('buddyWorkload', '/api/analytics/buddy-workload')">Buddy Workload</button>
+            <button class="btn btn-warning" onclick="testEndpoint('monthlyReport', '/api/analytics/monthly-report')">Monthly Report</button>
+            <div id="analyticsDashboard-result" class="result" style="display:none;"></div>
+            <div id="matchingPerformance-result" class="result" style="display:none;"></div>
+            <div id="buddyWorkload-result" class="result" style="display:none;"></div>
+            <div id="monthlyReport-result" class="result" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5104/api';
+        let isConnected = false;
+
+        // Check API connection on page load
+        window.onload = function() {
+            checkConnection();
+            loadStatsData();
+        };
+
+        async function checkConnection() {
+            const indicator = document.getElementById('statusIndicator');
+            const status = document.getElementById('connectionStatus');
+            
+            try {
+                const response = await fetch(`${API_BASE}/employees`);
+                if (response.ok) {
+                    isConnected = true;
+                    indicator.classList.add('connected');
+                    status.textContent = 'Connected to BuddyMatch API';
+                } else {
+                    throw new Error('API responded with error');
+                }
+            } catch (error) {
+                isConnected = false;
+                indicator.classList.remove('connected');
+                status.textContent = 'Disconnected - Please start backend server';
+            }
+        }
+
+        async function loadStatsData() {
+            try {
+                const [employees, buddyGuides, newcomers] = await Promise.all([
+                    fetch(`${API_BASE}/employees`).then(r => r.json()),
+                    fetch(`${API_BASE}/employees/buddy-guides`).then(r => r.json()),
+                    fetch(`${API_BASE}/employees/newcomers`).then(r => r.json())
+                ]);
+
+                document.getElementById('totalEmployees').textContent = employees.length;
+                document.getElementById('buddyGuides').textContent = buddyGuides.length;
+                document.getElementById('newcomers').textContent = newcomers.length;
+                document.getElementById('hrTeam').textContent = employees.filter(e => e.role === 1).length;
+            } catch (error) {
+                console.error('Failed to load stats:', error);
+            }
+        }
+
+        async function testEndpoint(resultId, endpoint) {
+            const resultDiv = document.getElementById(`${resultId}-result`);
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.innerHTML = '<div class="loading-spinner"></div>Testing endpoint...';
+
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <strong>✅ Success!</strong> Found ${Array.isArray(data) ? data.length : 1} items
+                        <details style="margin-top: 10px;">
+                            <summary>View JSON Response</summary>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </details>
+                    `;
+                } else {
+                    throw new Error(data.message || 'Request failed');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            }
+        }
+
+        async function loadNewcomers() {
+            try {
+                const response = await fetch(`${API_BASE}/employees/newcomers`);
+                const newcomers = await response.json();
+                
+                const select = document.getElementById('newcomerSelect');
+                select.innerHTML = '<option value="">Select newcomer...</option>';
+                
+                newcomers.forEach(newcomer => {
+                    const option = document.createElement('option');
+                    option.value = newcomer.id;
+                    option.textContent = `${newcomer.firstName} ${newcomer.lastName} (${newcomer.title})`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Failed to load newcomers:', error);
+            }
+        }
+
+        async function testMatchRecommendations() {
+            const newcomerId = document.getElementById('newcomerSelect').value;
+            if (!newcomerId) {
+                alert('Please select a newcomer first');
+                return;
+            }
+
+            const resultDiv = document.getElementById('matchRecommendations-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.innerHTML = '<div class="loading-spinner"></div>Getting AI recommendations...';
+
+            try {
+                const response = await fetch(`${API_BASE}/matching/recommendations/${newcomerId}`);
+                const recommendations = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <strong>🤖 AI Recommendations Found:</strong> ${recommendations.length} matches
+                        <details style="margin-top: 10px;">
+                            <summary>View Compatibility Scores</summary>
+                            <pre>${JSON.stringify(recommendations, null, 2)}</pre>
+                        </details>
+                    `;
+                } else {
+                    throw new Error(recommendations.message || 'Request failed');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            }
+        }
+
+        async function testEmployeeSearch() {
+            const resultDiv = document.getElementById('employeeSearch-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.innerHTML = '<div class="loading-spinner"></div>Testing employee search...';
+
+            try {
+                const searchParams = '?location=New York&buddyGuidesOnly=true';
+                const response = await fetch(`${API_BASE}/employees/search${searchParams}`);
+                const results = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <strong>🔍 Search Results:</strong> Found ${results.length} buddy guides in New York
+                        <details style="margin-top: 10px;">
+                            <summary>View Search Results</summary>
+                            <pre>${JSON.stringify(results, null, 2)}</pre>
+                        </details>
+                    `;
+                } else {
+                    throw new Error(results.message || 'Search failed');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            }
+        }
+
+        async function checkAllEndpoints() {
+            const endpoints = [
+                { id: 'employees', path: '/api/employees' },
+                { id: 'buddyGuides', path: '/api/employees/buddy-guides' },
+                { id: 'newcomers', path: '/api/employees/newcomers' },
+                { id: 'buddyProfiles', path: '/api/buddies' },
+                { id: 'monthlyLeaderboard', path: '/api/gamification/leaderboard/monthly' },
+                { id: 'overallFeedbackStats', path: '/api/feedback/overall-stats' },
+                { id: 'analyticsDashboard', path: '/api/analytics/dashboard' }
+            ];
+
+            for (const endpoint of endpoints) {
+                await testEndpoint(endpoint.id, endpoint.path);
+                // Small delay between requests
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+        }
+
+        function clearAllResults() {
+            const results = document.querySelectorAll('.result');
+            results.forEach(result => {
+                result.style.display = 'none';
+                result.innerHTML = '';
+            });
+        }
+
+        // Additional interactive functions
+        async function testBuddyByEmployee() {
+            const employeeId = document.getElementById('buddyEmployeeId').value;
+            if (!employeeId) {
+                alert('Please enter an employee ID');
+                return;
+            }
+            await testEndpoint('buddyByEmployee', `/api/buddies/employee/${employeeId}`);
+        }
+
+        async function testConversations() {
+            const userId = document.getElementById('conversationUserId').value;
+            if (!userId) {
+                alert('Please enter a user ID');
+                return;
+            }
+            await testEndpoint('conversations', `/api/messaging/conversations/${userId}`);
+        }
+
+        async function sendMessage() {
+            const matchId = document.getElementById('messageMatchId').value;
+            const receiverId = document.getElementById('messageReceiverId').value;
+            const content = document.getElementById('messageContent').value;
+
+            if (!matchId || !receiverId || !content) {
+                alert('Please fill in all message fields');
+                return;
+            }
+
+            const resultDiv = document.getElementById('sendMessage-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.innerHTML = '<div class="loading-spinner"></div>Sending message...';
+
+            try {
+                const response = await fetch(`${API_BASE}/messaging`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ matchId, receiverId, content })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `<strong>✅ Message sent successfully!</strong>`;
+                    document.getElementById('messageContent').value = '';
+                } else {
+                    throw new Error(result.message || 'Failed to send message');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            }
+        }
+
+        async function awardPoints() {
+            const buddyId = document.getElementById('awardBuddyId').value;
+            const activityType = document.getElementById('activityType').value;
+            const points = document.getElementById('pointsAmount').value;
+
+            if (!buddyId || !points) {
+                alert('Please fill in buddy ID and points amount');
+                return;
+            }
+
+            const resultDiv = document.getElementById('awardPoints-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.innerHTML = '<div class="loading-spinner"></div>Awarding points...';
+
+            try {
+                const response = await fetch(`${API_BASE}/gamification/award-points`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ buddyId, activityType, points: parseInt(points) })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `<strong>🏆 Points awarded successfully!</strong> ${points} points for ${activityType}`;
+                } else {
+                    throw new Error(result.message || 'Failed to award points');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            }
+        }
+
+        async function submitFeedback() {
+            const matchId = document.getElementById('feedbackMatchId').value;
+            const newcomerId = document.getElementById('feedbackNewcomerId').value;
+            const rating = document.getElementById('feedbackRating').value;
+            const comments = document.getElementById('feedbackComments').value;
+
+            if (!matchId || !newcomerId || !rating) {
+                alert('Please fill in match ID, newcomer ID, and rating');
+                return;
+            }
+
+            const resultDiv = document.getElementById('submitFeedback-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.innerHTML = '<div class="loading-spinner"></div>Submitting feedback...';
+
+            try {
+                const response = await fetch(`${API_BASE}/feedback`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ matchId, newcomerId, rating: parseInt(rating), comments })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `<strong>⭐ Feedback submitted successfully!</strong> Rating: ${rating}/5`;
+                    document.getElementById('feedbackComments').value = '';
+                } else {
+                    throw new Error(result.message || 'Failed to submit feedback');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

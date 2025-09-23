@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{95B664B9-0243-45DB-9AC4-AD4DDF3656BE}|BuddyMatch.Api\\BuddyMatch.Api.csproj|c:\\users\\liubovfomicheva\\source\\repos\\vibe-coding\\buddymatch.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95B664B9-0243-45DB-9AC4-AD4DDF3656BE}|BuddyMatch.Api\\BuddyMatch.Api.csproj|solutionrelative:buddymatch.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95B664B9-0243-45DB-9AC4-AD4DDF3656BE}|BuddyMatch.Api\\BuddyMatch.Api.csproj|c:\\users\\liubovfomicheva\\source\\repos\\vibe-coding\\buddymatch.api\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95B664B9-0243-45DB-9AC4-AD4DDF3656BE}|BuddyMatch.Api\\BuddyMatch.Api.csproj|solutionrelative:buddymatch.api\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 809,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Program.cs",
+              "RelativeDocumentMoniker": "BuddyMatch.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Program.cs",
+              "RelativeToolTip": "BuddyMatch.Api\\Program.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T15:36:30.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "BuddyMatch.Api\\WeatherForecast.cs",
+              "ToolTip": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\WeatherForecast.cs",
+              "RelativeToolTip": "BuddyMatch.Api\\WeatherForecast.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T15:36:28.072Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

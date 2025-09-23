@@ -1,0 +1,6 @@
+@BuddyMatch.Api_HostAddress = http://localhost:5104
+
+GET {{BuddyMatch.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
