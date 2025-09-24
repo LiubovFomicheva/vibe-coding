@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/UserContext';
 import { Employee, BuddyProfile, BuddyMatch, BuddyMatchRecommendation, MatchStatus, EmployeeRole } from '../../types';
-import { employeeApi, matchingApi, buddyApi } from '../../services/api';
+import { employeeApi, matchingApi, buddyApi, matchApi } from '../../services/api';
 import NewcomerMatchingWorkflow from './NewcomerMatchingWorkflow';
 import MatchesManagement from './MatchesManagement';
 import BuddyCatalog from './BuddyCatalog';
@@ -26,9 +26,7 @@ const HRMatchingDashboard: React.FC = () => {
 
       const [newcomersData, matchesData] = await Promise.all([
         employeeApi.getNewcomers(),
-        // We'll need to create this API endpoint
-        // For now, we'll use an empty array
-        Promise.resolve([])
+        matchApi.getAll()
       ]);
 
       setNewcomers(newcomersData);

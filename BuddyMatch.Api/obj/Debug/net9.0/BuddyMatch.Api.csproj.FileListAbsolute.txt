@@ -163,3 +163,4 @@ C:\Users\LiubovFomicheva\source\repos\vibe-coding\BuddyMatch.Api\obj\Debug\net9.
 C:\Users\LiubovFomicheva\source\repos\vibe-coding\BuddyMatch.Api\obj\Debug\net9.0\BuddyMatch.Api.pdb
 C:\Users\LiubovFomicheva\source\repos\vibe-coding\BuddyMatch.Api\obj\Debug\net9.0\BuddyMatch.Api.genruntimeconfig.cache
 C:\Users\LiubovFomicheva\source\repos\vibe-coding\BuddyMatch.Api\obj\Debug\net9.0\ref\BuddyMatch.Api.dll
+C:\Users\LiubovFomicheva\source\repos\vibe-coding\BuddyMatch.Api\obj\Debug\net9.0\BuddyMatch.Api.sourcelink.json

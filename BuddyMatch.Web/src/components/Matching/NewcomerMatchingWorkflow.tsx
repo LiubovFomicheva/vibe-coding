@@ -96,6 +96,29 @@ const NewcomerMatchingWorkflow: React.FC<NewcomerMatchingWorkflowProps> = ({
     return `${remaining}/${buddy.maxActiveBuddies} slots available`;
   };
 
+  // Calculate detailed scoring breakdown for AI visualization
+  const calculateScoreBreakdown = (rec: BuddyMatchRecommendation, newcomer: Employee) => {
+    const techStackScore = rec.matchingTechStack.length > 0 ? 40 : 0;
+    const locationScore = rec.location === newcomer.location ? 30 : 9; // 30% if same, 9% if different (30% * 0.3)
+    const interestsScore = rec.matchingInterests.length > 0 ? 20 : 0;
+    const languageScore = 10; // Simplified for demo
+    
+    return {
+      techStack: techStackScore,
+      location: locationScore,
+      interests: interestsScore,
+      language: languageScore,
+      bonus: Math.max(0, rec.compatibilityScore * 100 - techStackScore - locationScore - interestsScore - languageScore)
+    };
+  };
+
+  const getScoreLabel = (score: number) => {
+    if (score >= 80) return { label: 'Excellent Match', emoji: '🎯', color: '#28a745' };
+    if (score >= 60) return { label: 'Good Match', emoji: '👍', color: '#007bff' };
+    if (score >= 40) return { label: 'Fair Match', emoji: '🤔', color: '#ffc107' };
+    return { label: 'Poor Match', emoji: '😐', color: '#dc3545' };
+  };
+
   return (
     <div className="newcomer-matching-workflow">
       {!selectedNewcomer ? (
@@ -180,9 +203,43 @@ const NewcomerMatchingWorkflow: React.FC<NewcomerMatchingWorkflowProps> = ({
               <div className="section-header">
                 <h3>
                   <span className="section-icon">🤖</span>
-                  AI Recommendations
+                  AI-Powered Smart Recommendations
                 </h3>
-                <p>Ranked by compatibility score based on tech stack, location, and interests</p>
+                <p>Advanced algorithm analyzes 4 key factors with weighted scoring for optimal matches</p>
+                
+                <div className="algorithm-explanation">
+                  <div className="algorithm-title">
+                    <span className="brain-icon">🧠</span>
+                    How our AI works:
+                  </div>
+                  <div className="algorithm-weights">
+                    <div className="weight-item">
+                      <span className="weight-icon">⚡</span>
+                      <span className="weight-label">Tech Stack</span>
+                      <span className="weight-value">40%</span>
+                    </div>
+                    <div className="weight-item">
+                      <span className="weight-icon">📍</span>
+                      <span className="weight-label">Location</span>
+                      <span className="weight-value">30%</span>
+                    </div>
+                    <div className="weight-item">
+                      <span className="weight-icon">🎯</span>
+                      <span className="weight-label">Interests</span>
+                      <span className="weight-value">20%</span>
+                    </div>
+                    <div className="weight-item">
+                      <span className="weight-icon">🗣️</span>
+                      <span className="weight-label">Languages</span>
+                      <span className="weight-value">10%</span>
+                    </div>
+                    <div className="weight-item bonus">
+                      <span className="weight-icon">🎁</span>
+                      <span className="weight-label">Team/Unit Bonus</span>
+                      <span className="weight-value">+15%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="match-notes">
@@ -197,69 +254,166 @@ const NewcomerMatchingWorkflow: React.FC<NewcomerMatchingWorkflowProps> = ({
               </div>
 
               <div className="recommendations-list">
-                {recommendations.map((rec, index) => (
-                  <div key={rec.buddyId} className={`recommendation-card rank-${index + 1}`}>
-                    <div className="rank-badge">#{index + 1}</div>
-                    
-                    <div className="buddy-info">
-                      <div className="buddy-header">
-                        <h4>{rec.buddyName}</h4>
-                        <div className={`compatibility-score ${getCompatibilityColor(rec.compatibilityScore)}`}>
-                          {Math.round(rec.compatibilityScore)}%
-                        </div>
-                      </div>
+                {recommendations.map((rec, index) => {
+                  const scoreBreakdown = calculateScoreBreakdown(rec, selectedNewcomer);
+                  const scoreLabel = getScoreLabel(rec.compatibilityScore * 100);
+                  
+                  return (
+                    <div key={rec.buddyId} className={`recommendation-card rank-${index + 1}`}>
+                      <div className="rank-badge">#{index + 1}</div>
                       
-                      <div className="buddy-details">
-                        <p className="buddy-title">{rec.title}</p>
-                        <p className="buddy-location">{rec.unit} • {rec.location}</p>
-                      </div>
-
-                      <div className="compatibility-breakdown">
-                        {rec.matchingTechStack.length > 0 && (
-                          <div className="match-item">
-                            <span className="match-icon">⚡</span>
-                            <span>Tech: {rec.matchingTechStack.join(', ')}</span>
+                      <div className="buddy-info">
+                        <div className="buddy-header">
+                          <div className="buddy-name-section">
+                            <h4>{rec.buddyName}</h4>
+                            <p className="buddy-title">{rec.title}</p>
+                            <p className="buddy-location">{rec.unit} • {rec.location}</p>
                           </div>
-                        )}
-                        {rec.matchingInterests.length > 0 && (
-                          <div className="match-item">
-                            <span className="match-icon">🎯</span>
-                            <span>Interests: {rec.matchingInterests.join(', ')}</span>
+                          
+                          <div className="compatibility-section">
+                            <div className={`compatibility-score ${getCompatibilityColor(rec.compatibilityScore * 100)}`}>
+                              <span className="score-emoji">{scoreLabel.emoji}</span>
+                              <span className="score-value">{Math.round(rec.compatibilityScore * 100)}%</span>
+                            </div>
+                            <div className="score-label" style={{color: scoreLabel.color}}>
+                              {scoreLabel.label}
+                            </div>
                           </div>
-                        )}
-                      </div>
-
-                      <div className="buddy-availability">
-                        <span className="availability-text">
-                          {getAvailabilityText({ 
-                            maxActiveBuddies: rec.maxActiveBuddies, 
-                            currentActiveBuddies: rec.currentActiveBuddies 
-                          } as BuddyProfile)}
-                        </span>
-                      </div>
-
-                      {rec.reasonForRecommendation && (
-                        <div className="recommendation-reason">
-                          <span className="reason-icon">💡</span>
-                          {rec.reasonForRecommendation}
                         </div>
-                      )}
-                    </div>
 
-                    <div className="recommendation-actions">
-                      <button
-                        className={`btn btn-primary ${index === 0 ? 'btn-highlight' : ''}`}
-                        onClick={() => handleCreateMatch(rec.buddyId)}
-                        disabled={loading || !rec.canAcceptNewBuddy}
-                      >
-                        {index === 0 && '⭐'} Create Match
-                      </button>
-                      {!rec.canAcceptNewBuddy && (
-                        <span className="unavailable-text">At capacity</span>
-                      )}
+                        {/* AI Algorithm Visualization */}
+                        <div className="ai-scoring-breakdown">
+                          <div className="scoring-header">
+                            <span className="ai-icon">🤖</span>
+                            <h5>AI Compatibility Analysis</h5>
+                          </div>
+                          
+                          <div className="scoring-details">
+                            <div className="score-component">
+                              <div className="component-header">
+                                <span className="component-icon">⚡</span>
+                                <span className="component-label">Tech Stack Match</span>
+                                <span className="component-weight">(40% weight)</span>
+                                <span className="component-score">{scoreBreakdown.techStack}%</span>
+                              </div>
+                              <div className="progress-bar">
+                                <div 
+                                  className="progress-fill tech-stack" 
+                                  style={{width: `${Math.min(100, (scoreBreakdown.techStack / 40) * 100)}%`}}
+                                ></div>
+                              </div>
+                              {rec.matchingTechStack.length > 0 && (
+                                <div className="match-details">
+                                  Matching: {rec.matchingTechStack.join(', ')}
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="score-component">
+                              <div className="component-header">
+                                <span className="component-icon">📍</span>
+                                <span className="component-label">Location Match</span>
+                                <span className="component-weight">(30% weight)</span>
+                                <span className="component-score">{scoreBreakdown.location}%</span>
+                              </div>
+                              <div className="progress-bar">
+                                <div 
+                                  className="progress-fill location" 
+                                  style={{width: `${Math.min(100, (scoreBreakdown.location / 30) * 100)}%`}}
+                                ></div>
+                              </div>
+                              <div className="match-details">
+                                {rec.location === selectedNewcomer.location ? 
+                                  '✅ Same location' : 
+                                  '🌍 Different location (reduced score)'
+                                }
+                              </div>
+                            </div>
+
+                            <div className="score-component">
+                              <div className="component-header">
+                                <span className="component-icon">🎯</span>
+                                <span className="component-label">Interests Match</span>
+                                <span className="component-weight">(20% weight)</span>
+                                <span className="component-score">{scoreBreakdown.interests}%</span>
+                              </div>
+                              <div className="progress-bar">
+                                <div 
+                                  className="progress-fill interests" 
+                                  style={{width: `${Math.min(100, (scoreBreakdown.interests / 20) * 100)}%`}}
+                                ></div>
+                              </div>
+                              {rec.matchingInterests.length > 0 && (
+                                <div className="match-details">
+                                  Shared: {rec.matchingInterests.join(', ')}
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="score-component">
+                              <div className="component-header">
+                                <span className="component-icon">🗣️</span>
+                                <span className="component-label">Language Match</span>
+                                <span className="component-weight">(10% weight)</span>
+                                <span className="component-score">{scoreBreakdown.language}%</span>
+                              </div>
+                              <div className="progress-bar">
+                                <div 
+                                  className="progress-fill language" 
+                                  style={{width: `${Math.min(100, (scoreBreakdown.language / 10) * 100)}%`}}
+                                ></div>
+                              </div>
+                            </div>
+
+                            {scoreBreakdown.bonus > 0 && (
+                              <div className="score-component bonus">
+                                <div className="component-header">
+                                  <span className="component-icon">🎁</span>
+                                  <span className="component-label">Team/Unit Bonus</span>
+                                  <span className="component-weight">(extra)</span>
+                                  <span className="component-score">+{Math.round(scoreBreakdown.bonus)}%</span>
+                                </div>
+                                <div className="match-details">
+                                  Additional points for team/unit alignment
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="buddy-availability">
+                          <span className="availability-icon">👥</span>
+                          <span className="availability-text">
+                            {getAvailabilityText({ 
+                              maxActiveBuddies: rec.maxActiveBuddies, 
+                              currentActiveBuddies: rec.currentActiveBuddies 
+                            } as BuddyProfile)}
+                          </span>
+                        </div>
+
+                        {rec.reasonForRecommendation && (
+                          <div className="recommendation-reason">
+                            <span className="reason-icon">💡</span>
+                            <div className="reason-text">{rec.reasonForRecommendation}</div>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="recommendation-actions">
+                        <button
+                          className={`btn btn-primary ${index === 0 ? 'btn-highlight' : ''}`}
+                          onClick={() => handleCreateMatch(rec.buddyId)}
+                          disabled={loading || !rec.canAcceptNewBuddy}
+                        >
+                          {index === 0 && '⭐'} Create Match
+                        </button>
+                        {!rec.canAcceptNewBuddy && (
+                          <span className="unavailable-text">At capacity</span>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ) : (

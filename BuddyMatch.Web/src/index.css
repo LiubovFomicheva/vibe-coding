@@ -1,25 +1,91 @@
-/* EPAM Brand Colors and Global Styles */
+/* Modern Design System - Enhanced EPAM Brand with Dark Theme */
 :root {
+  /* Primary Colors */
   --epam-primary: #0071CE;
-  --epam-secondary: #6666CC;
-  --epam-success: #00B050;
-  --epam-warning: #FFA500;
-  --epam-error: #D32F2F;
-  --epam-dark: #2B2B2B;
-  --epam-light: #F5F5F5;
+  --epam-primary-50: #EFF8FF;
+  --epam-primary-100: #DBEAFE;
+  --epam-primary-200: #BFDBFE;
+  --epam-primary-500: #0071CE;
+  --epam-primary-600: #0369A1;
+  --epam-primary-700: #0284C7;
+  --epam-primary-900: #0C4A6E;
+  
+  /* Secondary & Accent Colors */
+  --epam-secondary: #6366F1;
+  --epam-accent: #8B5CF6;
+  --epam-success: #10B981;
+  --epam-warning: #F59E0B;
+  --epam-error: #EF4444;
+  --epam-info: #06B6D4;
+  
+  /* Light Theme Colors */
+  --epam-dark: #1F2937;
+  --epam-light: #F9FAFB;
   --epam-white: #FFFFFF;
   --epam-gray-100: #F8F9FA;
   --epam-gray-200: #E9ECEF;
   --epam-gray-300: #DEE2E6;
   --epam-gray-400: #CED4DA;
   --epam-gray-500: #ADB5BD;
-  --epam-gray-600: #6C757D;
-  --epam-gray-700: #495057;
-  --epam-gray-800: #343A40;
-  --epam-gray-900: #212529;
+  --epam-gray-600: #6B7280;
+  --epam-gray-700: #374151;
+  --epam-gray-800: #1F2937;
+  --epam-gray-900: #111827;
   
-  /* Typography */
-  --font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Theme Variables - Default (Light) */
+  --bg-primary: var(--epam-white);
+  --bg-secondary: var(--epam-light);
+  --bg-tertiary: var(--epam-gray-100);
+  --text-primary: var(--epam-gray-900);
+  --text-secondary: var(--epam-gray-700);
+  --text-tertiary: var(--epam-gray-600);
+  --border-primary: var(--epam-gray-200);
+  --border-secondary: var(--epam-gray-300);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  /* Dark Theme Colors */
+  --epam-dark: #F9FAFB;
+  --epam-light: #111827;
+  --epam-white: #1F2937;
+  --epam-gray-100: #1F2937;
+  --epam-gray-200: #374151;
+  --epam-gray-300: #4B5563;
+  --epam-gray-400: #6B7280;
+  --epam-gray-500: #9CA3AF;
+  --epam-gray-600: #D1D5DB;
+  --epam-gray-700: #E5E7EB;
+  --epam-gray-800: #F3F4F6;
+  --epam-gray-900: #F9FAFB;
+  
+  /* Theme Variables - Dark */
+  --bg-primary: #111827;
+  --bg-secondary: #1F2937;
+  --bg-tertiary: #374151;
+  --text-primary: #F9FAFB;
+  --text-secondary: #E5E7EB;
+  --text-tertiary: #D1D5DB;
+  --border-primary: #374151;
+  --border-secondary: #4B5563;
+  
+  /* Dark Theme Glassmorphism */
+  --glass-bg: rgba(31, 41, 55, 0.8);
+  --glass-border: rgba(75, 85, 99, 0.3);
+  
+  /* Dark Theme Gradients */
+  --gradient-primary: linear-gradient(135deg, #0071CE, #6366F1);
+  --gradient-success: linear-gradient(135deg, #10B981, #059669);
+  --gradient-warm: linear-gradient(135deg, #F59E0B, #F97316);
+  --gradient-cool: linear-gradient(135deg, #06B6D4, #6366F1);
+}
+
+/* Global Variables */
+:root {
+  /* Modern Typography */
+  --font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-display: 'Inter Display', var(--font-family);
+  --font-family-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -43,11 +109,25 @@
   --border-radius-lg: 0.5rem;
   --border-radius-xl: 0.75rem;
   
-  /* Shadows */
+  /* Modern Shadows & Effects */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-colored: 0 10px 25px -3px rgba(0, 113, 206, 0.1), 0 4px 6px -2px rgba(0, 113, 206, 0.05);
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-blur: blur(20px);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--epam-primary), var(--epam-secondary));
+  --gradient-success: linear-gradient(135deg, var(--epam-success), #059669);
+  --gradient-warm: linear-gradient(135deg, #F59E0B, #F97316);
+  --gradient-cool: linear-gradient(135deg, var(--epam-info), var(--epam-secondary));
 }
 
 * {
@@ -56,13 +136,23 @@
   box-sizing: border-box;
 }
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Display:wght@400;500;600;700;800&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   height: 100%;
   font-family: var(--font-family);
   font-size: var(--font-size-base);
-  line-height: 1.5;
-  color: var(--epam-gray-800);
-  background-color: var(--epam-gray-100);
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: color 0.3s ease, background 0.3s ease;
 }
 
 #root {
@@ -106,7 +196,7 @@ html, body {
 .bg-gray-100 { background-color: var(--epam-gray-100); }
 .bg-gray-200 { background-color: var(--epam-gray-200); }
 
-/* Button Styles */
+/* Modern Button Styles */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -115,29 +205,49 @@ html, body {
   font-size: var(--font-size-sm);
   font-weight: 600;
   text-decoration: none;
-  border: none;
-  border-radius: var(--border-radius-md);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-lg);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn:active {
   transform: translateY(0);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-primary {
-  background-color: var(--epam-primary);
+  background: var(--gradient-primary);
   color: white;
+  box-shadow: var(--shadow-colored);
 }
 
 .btn-primary:hover {
-  background-color: #005ba3;
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-3px);
 }
 
 .btn-secondary {
@@ -171,17 +281,34 @@ html, body {
   font-size: var(--font-size-lg);
 }
 
-/* Card Styles */
+/* Modern Card Styles */
 .card {
-  background-color: white;
-  border-radius: var(--border-radius-lg);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-sm);
   padding: var(--spacing-lg);
   margin-bottom: var(--spacing-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-primary);
 }
 
 .card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--epam-primary);
+}
+
+/* Dark theme specific overrides */
+[data-theme="dark"] .card {
+  background: var(--glass-bg);
+  border-color: var(--border-primary);
+}
+
+[data-theme="dark"] .card:hover {
+  border-color: var(--epam-primary);
+  box-shadow: 0 10px 25px -3px rgba(0, 113, 206, 0.3);
 }
 
 .card-header {
@@ -417,6 +544,163 @@ html, body {
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+/* Modern Utility Classes */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-bg-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-bg-success {
+  background: var(--gradient-success);
+}
+
+.gradient-bg-warm {
+  background: var(--gradient-warm);
+}
+
+.gradient-bg-cool {
+  background: var(--gradient-cool);
+}
+
+/* Pulse Animation */
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Bounce Animation */
+.bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+/* Fade In Animation */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In Animation */
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Modern Focus States */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 113, 206, 0.1);
+  border-color: var(--epam-primary);
+}
+
+/* Interactive Hover Effects */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 113, 206, 0.3);
+}
+
+/* Status Indicators */
+.status-online {
+  position: relative;
+}
+
+.status-online::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--epam-success);
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--epam-gray-400) var(--epam-gray-100);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--epam-gray-100);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--epam-gray-400);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--epam-gray-500);
 }
 
 /* Import component styles */

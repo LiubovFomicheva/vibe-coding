@@ -34,11 +34,11 @@ body {
 }
 
 .main-content.sidebar-open {
-  margin-left: 250px;
+  margin-left: 280px;
 }
 
 .main-content.sidebar-closed {
-  margin-left: 60px;
+  margin-left: 80px;
 }
 
 /* Basic button styles */

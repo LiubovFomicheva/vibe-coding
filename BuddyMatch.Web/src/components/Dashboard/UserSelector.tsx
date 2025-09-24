@@ -1,5 +1,6 @@
 import React from 'react';
 import { Employee, EmployeeRole } from '../../types';
+import Avatar from '../UI/Avatar';
 
 interface UserSelectorProps {
   employees: Employee[];
@@ -13,16 +14,25 @@ const UserSelector: React.FC<UserSelectorProps> = ({ employees, onUserSelect }) 
 
   const UserCard: React.FC<{ user: Employee; category: string }> = ({ user, category }) => (
     <div 
-      className="user-card"
+      className="user-card glass-card hover-lift"
       onClick={() => onUserSelect(user)}
+      style={{ cursor: 'pointer' }}
     >
-      <div className="user-card-avatar">
-        {user.firstName[0]}{user.lastName[0]}
-      </div>
+      <Avatar 
+        employee={user} 
+        size="lg" 
+        showStatus={user.isBuddyGuide}
+      />
       <div className="user-card-info">
-        <h4 className="user-card-name">{user.fullName}</h4>
-        <p className="user-card-title">{user.title}</p>
-        <p className="user-card-location">{user.location} • {user.unit}</p>
+        <h4 className="user-card-name" style={{ color: 'var(--text-primary)' }}>
+          {user.fullName}
+        </h4>
+        <p className="user-card-title" style={{ color: 'var(--text-secondary)' }}>
+          {user.title}
+        </p>
+        <p className="user-card-location" style={{ color: 'var(--text-tertiary)' }}>
+          {user.location} • {user.unit}
+        </p>
         <span className={`user-card-badge badge-${category}`}>
           {category === 'hr' ? 'HR Manager' : 
            category === 'guide' ? 'Buddy Guide' : 'Newcomer'}

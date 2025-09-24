@@ -81,14 +81,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     <aside style={{
       position: 'fixed',
       left: 0,
-      top: '60px',
-      width: isOpen ? '250px' : '60px',
-      height: 'calc(100vh - 60px)',
-      background: 'white',
-      borderRight: '1px solid #ddd',
-      transition: 'width 0.3s ease',
+      top: '70px',
+      width: isOpen ? '280px' : '80px',
+      height: 'calc(100vh - 70px)',
+      background: 'var(--glass-bg)',
+      backdropFilter: 'blur(20px)',
+      borderRight: '1px solid var(--glass-border)',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       overflow: 'hidden',
-      zIndex: 1000
+      zIndex: 1000,
+      boxShadow: '4px 0 20px rgba(0, 0, 0, 0.05)'
     }}>
       <nav style={{ padding: '20px 0' }}>
         {filteredItems.map((item) => (
@@ -98,27 +100,51 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
             style={({ isActive }) => ({
               display: 'flex',
               alignItems: 'center',
-              gap: '12px',
-              padding: '12px 20px',
-              color: isActive ? '#0071CE' : '#666',
+              gap: '16px',
+              padding: '16px 24px',
+              margin: '4px 12px',
+              color: isActive ? '#ffffff' : 'var(--text-tertiary)',
               textDecoration: 'none',
-              borderRight: isActive ? '3px solid #0071CE' : '3px solid transparent',
-              background: isActive ? '#f0f8ff' : 'transparent',
-              transition: 'all 0.2s',
-              whiteSpace: 'nowrap'
+              borderRadius: '16px',
+              background: isActive 
+                ? 'linear-gradient(135deg, #0071CE, #6366F1)' 
+                : 'transparent',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              whiteSpace: 'nowrap',
+              position: 'relative',
+              overflow: 'hidden',
+              boxShadow: isActive ? '0 8px 20px rgba(0, 113, 206, 0.3)' : 'none'
             })}
+            onMouseEnter={(e) => {
+              if (!e.currentTarget.classList.contains('active')) {
+                e.currentTarget.style.background = 'rgba(0, 113, 206, 0.1)';
+                e.currentTarget.style.color = '#0071CE';
+                e.currentTarget.style.transform = 'translateX(4px)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!e.currentTarget.classList.contains('active')) {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.color = 'var(--text-tertiary)';
+                e.currentTarget.style.transform = 'translateX(0)';
+              }
+            }}
           >
             <span style={{ 
-              fontSize: '1.2rem', 
-              minWidth: '20px',
-              textAlign: 'center'
+              fontSize: '1.4rem', 
+              minWidth: '24px',
+              textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}>
               {item.icon}
             </span>
             {isOpen && (
               <span style={{ 
-                fontSize: '0.9rem',
-                fontWeight: '500'
+                fontSize: '0.95rem',
+                fontWeight: '600',
+                letterSpacing: '-0.01em'
               }}>
                 {item.label}
               </span>

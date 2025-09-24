@@ -89,9 +89,9 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="dashboard">
-      <div className="page-header">
-        <h1 className="page-title">
+    <div className="dashboard fade-in">
+      <div className="page-header glass-card hover-lift">
+        <h1 className="page-title gradient-text">
           <span className="page-icon">📊</span>
           BuddyMatch Dashboard
         </h1>
@@ -114,8 +114,8 @@ const Dashboard: React.FC = () => {
       ) : (
         <div className="dashboard-content">
           <div className="dashboard-welcome">
-            <div className="welcome-card">
-              <h2>Welcome back, {currentUser.firstName}! 👋</h2>
+            <div className="welcome-card glass-card hover-lift">
+              <h2 className="gradient-text">Welcome back, {currentUser.firstName}! 👋</h2>
               <p>
                 {currentUser.role === EmployeeRole.HR 
                   ? "Ready to help create meaningful connections and support our newcomers?"
@@ -125,7 +125,7 @@ const Dashboard: React.FC = () => {
                 }
               </p>
               <button 
-                className="btn btn-sm btn-secondary"
+                className="btn btn-sm btn-outline hover-glow"
                 onClick={() => setCurrentUser(null)}
               >
                 Switch User
