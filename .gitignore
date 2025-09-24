@@ -3,4 +3,5 @@
 ################################################################################
 
 /.vs/BuddyMatch/CopilotIndices/17.14.878.3237
-/BuddyMatch.Wev/node_modules
+BuddyMatch.Wev/node_modules
+BuddyMatch.Web/node_modules/.cache
