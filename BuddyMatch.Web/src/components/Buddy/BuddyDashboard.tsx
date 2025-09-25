@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useUser } from '../../contexts/UserContext';
 import { BuddyMatch, MatchStatus } from '../../types';
-import { matchingApi } from '../../services/api';
+import { matchingApi, matchApi } from '../../services/api';
 import BuddyMatchRequests from './BuddyMatchRequests';
 import BuddyActiveMatches from './BuddyActiveMatches';
 import './BuddyDashboard.css';
@@ -14,30 +14,41 @@ const BuddyDashboard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'requests' | 'active'>('requests');
 
-  useEffect(() => {
-    if (currentUser?.isBuddyGuide) {
-      loadMatches();
-    }
-  }, [currentUser]);
-
-  const loadMatches = async () => {
+  const loadMatches = useCallback(async () => {
     if (!currentUser) return;
 
     try {
       setLoading(true);
       setError(null);
 
-      // For now, we'll use empty arrays since we need to implement these API endpoints
-      // TODO: Implement GET /api/matches/buddy/{buddyId}/pending and /active
-      setPendingMatches([]);
-      setActiveMatches([]);
+      // Load all matches for this buddy
+      const allMatches = await matchApi.getByBuddy(currentUser.id);
+      
+      // Separate matches by status
+      const pending = allMatches.filter(match => match.status === MatchStatus.Pending);
+      const active = allMatches.filter(match => match.status === MatchStatus.Active);
+      
+      setPendingMatches(pending);
+      setActiveMatches(active);
+      
+      console.log('Loaded matches for buddy:', {
+        total: allMatches.length,
+        pending: pending.length,
+        active: active.length
+      });
     } catch (error) {
       console.error('Failed to load matches:', error);
       setError('Failed to load your matches');
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (currentUser?.isBuddyGuide) {
+      loadMatches();
+    }
+  }, [currentUser, loadMatches]);
 
   const handleMatchResponse = async (matchId: string, action: 'accept' | 'reject', reason?: string) => {
     if (!currentUser) return;

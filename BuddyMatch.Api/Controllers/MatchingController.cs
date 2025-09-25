@@ -37,7 +37,8 @@ namespace BuddyMatch.Api.Controllers
                 request.BuddyId, 
                 request.NewcomerId, 
                 request.HRId, 
-                request.Notes ?? string.Empty
+                request.Notes ?? string.Empty,
+                request.CompatibilityScore
             );
             
             return Ok(new { MatchId = match.Id, CompatibilityScore = match.CompatibilityScore });
@@ -76,6 +77,7 @@ namespace BuddyMatch.Api.Controllers
         public Guid NewcomerId { get; set; }
         public Guid HRId { get; set; }
         public string? Notes { get; set; }
+        public double? CompatibilityScore { get; set; }
     }
     
     public class AcceptMatchRequest

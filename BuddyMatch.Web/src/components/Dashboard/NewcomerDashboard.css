@@ -1,0 +1,488 @@
+/* Newcomer Dashboard Styles */
+.newcomer-dashboard {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  color: #0071CE;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.page-icon {
+  font-size: 2rem;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Status Card */
+.status-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.status-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+}
+
+.status-content.warning {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border-left: 6px solid #ffc107;
+}
+
+.status-content.info {
+  background: linear-gradient(135deg, #d1ecf1, #74b9ff);
+  border-left: 6px solid #17a2b8;
+}
+
+.status-content.success {
+  background: linear-gradient(135deg, #d4edda, #00b894);
+  border-left: 6px solid #28a745;
+}
+
+.status-content.secondary {
+  background: linear-gradient(135deg, #f8f9fa, #ddd);
+  border-left: 6px solid #6c757d;
+}
+
+.status-icon {
+  font-size: 4rem;
+  flex-shrink: 0;
+}
+
+.status-info h2 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.status-info p {
+  margin: 0;
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Buddy Info Card */
+.buddy-info-card, .pending-info-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #0071CE, #6666CC);
+  color: white;
+  padding: 20px 32px;
+}
+
+.card-header h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.header-icon {
+  font-size: 1.5rem;
+}
+
+/* Buddy Profile */
+.buddy-profile, .pending-buddy-profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 32px;
+  border-bottom: 2px solid #f8f9fa;
+}
+
+.buddy-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0071CE, #6666CC);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 113, 206, 0.3);
+}
+
+.buddy-details {
+  flex: 1;
+}
+
+.buddy-details h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.buddy-title {
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+  color: #0071CE;
+  font-weight: 600;
+}
+
+.buddy-unit {
+  margin: 0 0 16px 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+.buddy-tech, .buddy-languages {
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.tech-label, .lang-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.tech-value, .lang-value {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Buddy Actions */
+.buddy-actions {
+  display: flex;
+  gap: 16px;
+  padding: 0 32px 32px 32px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.btn-primary {
+  background: #0071CE;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #005ba3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 113, 206, 0.3);
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #0071CE;
+  border: 2px solid #0071CE;
+}
+
+.btn-outline:hover {
+  background: #0071CE;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Compatibility Info */
+.compatibility-info {
+  padding: 24px 32px 32px 32px;
+  background: linear-gradient(135deg, #f8fafe, #e3f2fd);
+  border-top: 2px solid #e3f2fd;
+}
+
+.compatibility-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.compatibility-icon {
+  font-size: 1.2rem;
+}
+
+.compatibility-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.compatibility-score {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0071CE;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.compatibility-description {
+  text-align: center;
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Pending Info */
+.pending-message {
+  padding: 20px 32px;
+  background: #f8f9fa;
+  border-top: 2px solid #e9ecef;
+}
+
+.pending-message p {
+  margin: 0;
+  color: #666;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.compatibility-preview {
+  padding: 16px 32px;
+  text-align: center;
+  background: #f8fafe;
+  border-top: 1px solid #e3f2fd;
+}
+
+.compatibility-score-small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: #0071CE;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 113, 206, 0.1);
+}
+
+/* Help Card */
+.help-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.help-content {
+  padding: 24px 32px 32px 32px;
+}
+
+.help-content p {
+  margin: 0 0 20px 0;
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.help-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0071CE;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Error */
+.error {
+  text-align: center;
+  padding: 60px 30px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.error h3 {
+  color: #dc3545;
+  margin-bottom: 10px;
+}
+
+.error p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .newcomer-dashboard {
+    padding: 20px;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .status-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 24px;
+  }
+  
+  .status-icon {
+    font-size: 3rem;
+  }
+  
+  .status-info h2 {
+    font-size: 1.5rem;
+  }
+  
+  .buddy-profile, .pending-buddy-profile {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding: 24px;
+  }
+  
+  .buddy-avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 1.5rem;
+  }
+  
+  .buddy-actions {
+    flex-direction: column;
+    padding: 0 24px 24px 24px;
+  }
+  
+  .buddy-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .help-actions {
+    flex-direction: column;
+  }
+  
+  .help-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .compatibility-info {
+    padding: 20px 24px 24px 24px;
+  }
+  
+  .compatibility-score {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .newcomer-dashboard {
+    padding: 15px;
+  }
+  
+  .card-header {
+    padding: 16px 20px;
+  }
+  
+  .buddy-profile, .pending-buddy-profile {
+    padding: 20px;
+  }
+  
+  .buddy-actions {
+    padding: 0 20px 20px 20px;
+  }
+  
+  .help-content {
+    padding: 20px;
+  }
+  
+  .compatibility-info {
+    padding: 16px 20px 20px 20px;
+  }
+}

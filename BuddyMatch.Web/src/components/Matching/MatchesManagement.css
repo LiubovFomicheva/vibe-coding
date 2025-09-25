@@ -37,13 +37,15 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .filter-controls, .sort-controls {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .filter-controls label, .sort-controls label {
@@ -53,18 +55,40 @@
 }
 
 .filter-controls select, .sort-controls select {
-  padding: 8px 12px;
-  border: 2px solid #ddd;
+  padding: 12px 16px;
+  border: 2px solid #e0e6ed;
   border-radius: 8px;
   font-size: 1rem;
+  font-weight: 500;
   background: white;
+  color: #333;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
+  min-width: 220px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.filter-controls select:hover, .sort-controls select:hover {
+  border-color: #0071CE;
+  background-color: #f8fafe;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 113, 206, 0.15);
 }
 
 .filter-controls select:focus, .sort-controls select:focus {
   outline: none;
   border-color: #0071CE;
+  box-shadow: 0 0 0 3px rgba(0, 113, 206, 0.1);
+  background-color: #f8fafe;
+}
+
+.filter-controls select:active, .sort-controls select:active {
+  transform: translateY(0);
 }
 
 /* No Matches */
@@ -275,6 +299,35 @@
   color: #333;
 }
 
+/* Match Metadata */
+.match-metadata {
+  margin: 15px 0;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #0071CE;
+}
+
+.created-by {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metadata-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metadata-value {
+  font-weight: 600;
+  color: #0071CE;
+  font-size: 0.9rem;
+}
+
 .match-notes {
   background: #f8f9fa;
   padding: 12px;
@@ -377,7 +430,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .matches-management {
     padding: 20px;
   }
@@ -428,5 +481,16 @@
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
+  }
+  
+  .match-metadata {
+    margin: 10px 0;
+    padding: 10px;
+  }
+  
+  .created-by {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
 }

@@ -206,7 +206,7 @@ const BuddyProfiles: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <button className="btn btn-primary" onClick={() => setShowCreateForm(true)}>
+              <button className="btn btn-primary create-profile-btn" onClick={() => setShowCreateForm(true)}>
                 ➕ Create Profile
               </button>
             )}

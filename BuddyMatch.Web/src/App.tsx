@@ -9,7 +9,7 @@ import MatchingWorkflow from './components/Matching/MatchingWorkflow';
 import BuddyDashboard from './components/Buddy/BuddyDashboard';
 import BuddyCatalog from './components/Matching/BuddyCatalog';
 import MessagingCenter from './components/Messaging/MessagingCenter';
-import Gamification from './components/Gamification/Gamification';
+import GamificationDashboard from './components/Gamification/GamificationDashboard';
 import Analytics from './components/Analytics/Analytics';
 import ApiTest from './components/Testing/ApiTest';
 import { UserProvider } from './contexts/UserContext';
@@ -34,7 +34,7 @@ const App: React.FC = () => {
                 <Route path="/buddy-catalog" element={<BuddyCatalog />} />
                 <Route path="/buddy-dashboard" element={<BuddyDashboard />} />
                 <Route path="/messages" element={<MessagingCenter />} />
-                <Route path="/gamification" element={<Gamification />} />
+                <Route path="/gamification" element={<GamificationDashboard />} />
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/api-test" element={<ApiTest />} />
               </Routes>

@@ -40,8 +40,8 @@ const HRMatchingDashboard: React.FC = () => {
   };
 
   const handleMatchCreated = (newMatch: BuddyMatch) => {
-    setMatches(prev => [newMatch, ...prev]);
-    // Refresh data to get updated status
+    // Instead of just adding to state, reload all data to ensure consistency
+    // This ensures we get the correct compatibility score and other data from backend
     loadData();
   };
 

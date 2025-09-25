@@ -132,7 +132,15 @@
 
 .newcomer-name {
   margin: 0 0 4px 0;
+  color: #333;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.newcomer-title {
+  margin: 0 0 4px 0;
   color: #666;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
@@ -170,6 +178,35 @@
 /* Request Content */
 .request-content {
   margin-bottom: 24px;
+}
+
+/* Match Metadata */
+.match-metadata {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #0071CE;
+}
+
+.created-by {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metadata-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metadata-value {
+  font-weight: 600;
+  color: #0071CE;
+  font-size: 0.9rem;
 }
 
 .hr-notes {

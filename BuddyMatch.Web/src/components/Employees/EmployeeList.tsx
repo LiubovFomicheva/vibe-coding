@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Employee, EmployeeRole } from '../../types';
 import { employeeApi } from '../../services/api';
+import EmployeeProfileModal from '../UI/EmployeeProfileModal';
+import './EmployeeList.css';
 
 const EmployeeList: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -8,6 +10,8 @@ const EmployeeList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'hr' | 'buddyguides' | 'newcomers'>('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     loadEmployees();
@@ -53,6 +57,16 @@ const EmployeeList: React.FC = () => {
   const getExperienceYears = (startDate: string) => {
     const years = (new Date().getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24 * 365);
     return Math.floor(years);
+  };
+
+  const handleViewProfile = (employee: Employee) => {
+    setSelectedEmployee(employee);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedEmployee(null);
   };
 
   if (loading) {
@@ -148,10 +162,12 @@ const EmployeeList: React.FC = () => {
                   )}
                 </div>
                 <div className="employee-actions">
-                  <button className="btn btn-sm btn-outline">View Profile</button>
-                  {employee.isBuddyGuide && (
-                    <button className="btn btn-sm btn-success">Message</button>
-                  )}
+                  <button 
+                    className="btn btn-sm btn-outline"
+                    onClick={() => handleViewProfile(employee)}
+                  >
+                    View Profile
+                  </button>
                 </div>
               </div>
             );
@@ -166,6 +182,15 @@ const EmployeeList: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Employee Profile Modal */}
+      {selectedEmployee && (
+        <EmployeeProfileModal
+          employee={selectedEmployee}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };

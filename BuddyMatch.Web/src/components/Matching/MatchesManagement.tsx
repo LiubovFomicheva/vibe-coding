@@ -23,7 +23,7 @@ const MatchesManagement: React.FC<MatchesManagementProps> = ({
         case 'oldest':
           return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
         case 'score':
-          return b.compatibilityScore - a.compatibilityScore;
+          return (b.compatibilityScore || 0) - (a.compatibilityScore || 0);
         default:
           return 0;
       }
@@ -143,31 +143,34 @@ const MatchesManagement: React.FC<MatchesManagementProps> = ({
                 <div className="match-participants">
                   <div className="participant buddy">
                     <div className="participant-avatar">
-                      {/* We'll need to get buddy info from the match */}
-                      BG
+                      {match.buddy?.firstName?.[0]}{match.buddy?.lastName?.[0]}
                     </div>
                     <div className="participant-info">
-                      <h4>Buddy Guide</h4>
-                      <p>ID: {match.buddyId}</p>
+                      <h4>{match.buddy?.firstName} {match.buddy?.lastName}</h4>
+                      <p>{match.buddy?.title}</p>
                     </div>
                   </div>
                   
                   <div className="match-arrow">
                     <span className="arrow">→</span>
                     <div className="compatibility-score">
-                      <span className="score-value">{Math.round(match.compatibilityScore)}%</span>
+                      <span className="score-value">
+                        {match.compatibilityScore && match.compatibilityScore > 0
+                          ? `${Math.round(match.compatibilityScore * 100)}%`
+                          : 'Calculating...'
+                        }
+                      </span>
                       <span className="score-label">match</span>
                     </div>
                   </div>
                   
                   <div className="participant newcomer">
                     <div className="participant-avatar">
-                      {/* We'll need to get newcomer info from the match */}
-                      NC
+                      {match.newcomer?.firstName?.[0]}{match.newcomer?.lastName?.[0]}
                     </div>
                     <div className="participant-info">
-                      <h4>Newcomer</h4>
-                      <p>ID: {match.newcomerId}</p>
+                      <h4>{match.newcomer?.firstName} {match.newcomer?.lastName}</h4>
+                      <p>{match.newcomer?.title}</p>
                     </div>
                   </div>
                 </div>
@@ -214,6 +217,15 @@ const MatchesManagement: React.FC<MatchesManagementProps> = ({
                       <span className="timeline-value">{getDaysActive(match)} days</span>
                     </div>
                   )}
+                </div>
+
+                <div className="match-metadata">
+                  <div className="created-by">
+                    <span className="metadata-label">Created by:</span>
+                    <span className="metadata-value">
+                      {match.createdByHR?.firstName} {match.createdByHR?.lastName} (HR)
+                    </span>
+                  </div>
                 </div>
 
                 {match.notes && (

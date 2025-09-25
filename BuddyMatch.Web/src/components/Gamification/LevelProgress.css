@@ -1,0 +1,260 @@
+/* Level Progress Styles */
+.level-progress {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  border: 2px solid #e3f2fd;
+  margin-top: 24px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.progress-header h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.next-level-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.next-level-text {
+  color: #666;
+}
+
+.next-level-name {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Progress Bar Container */
+.progress-bar-container {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.current-level-indicator, .next-level-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.level-badge {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.level-info {
+  text-align: center;
+}
+
+.level-name {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1;
+}
+
+.level-number {
+  display: block;
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* Progress Bar */
+.progress-bar {
+  position: relative;
+  height: 12px;
+  background: #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.6s ease;
+  position: relative;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Progress Details */
+.progress-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.points-to-next, .max-level-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  grid-column: 1 / -1;
+}
+
+.points-to-next {
+  color: #0071CE;
+  font-weight: 600;
+}
+
+.max-level-message {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #333;
+  font-weight: 700;
+}
+
+.points-icon, .crown-icon {
+  font-size: 1.2rem;
+}
+
+.level-benefits, .next-level-benefits {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.level-benefits h4, .next-level-benefits h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.level-benefits ul, .next-level-benefits ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.level-benefits li, .next-level-benefits li {
+  margin-bottom: 8px;
+  color: #666;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.level-benefits li::before {
+  content: '✓';
+  color: #28a745;
+  font-weight: bold;
+  width: 16px;
+}
+
+.next-level-benefits {
+  border: 2px dashed #0071CE;
+  background: linear-gradient(135deg, #f8fafe, #e3f2fd);
+}
+
+.next-level-benefits li::before {
+  content: '→';
+  color: #0071CE;
+  font-weight: bold;
+  width: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .level-progress {
+    padding: 20px;
+  }
+  
+  .progress-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .progress-bar-container {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .current-level-indicator {
+    order: 1;
+  }
+  
+  .progress-bar {
+    order: 2;
+  }
+  
+  .next-level-indicator {
+    order: 3;
+  }
+  
+  .progress-details {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .level-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .level-progress {
+    padding: 16px;
+  }
+  
+  .level-benefits, .next-level-benefits {
+    padding: 16px;
+  }
+  
+  .progress-bar {
+    height: 10px;
+  }
+  
+  .progress-text {
+    font-size: 0.6rem;
+  }
+}

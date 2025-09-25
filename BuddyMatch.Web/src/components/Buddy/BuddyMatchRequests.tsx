@@ -82,25 +82,41 @@ const BuddyMatchRequests: React.FC<BuddyMatchRequestsProps> = ({
             <div className="request-header">
               <div className="newcomer-info">
                 <div className="newcomer-avatar">
-                  {/* We'll need to get newcomer info from the match */}
-                  NC
+                  {match.newcomer?.firstName?.[0]}{match.newcomer?.lastName?.[0]}
                 </div>
                 <div className="newcomer-details">
                   <h3>New Match Request</h3>
-                  <p className="newcomer-name">Newcomer ID: {match.newcomerId}</p>
+                  <p className="newcomer-name">
+                    {match.newcomer?.firstName} {match.newcomer?.lastName}
+                  </p>
+                  <p className="newcomer-title">{match.newcomer?.title}</p>
                   <p className="match-date">Requested: {formatDate(match.createdAt)}</p>
                 </div>
               </div>
               
               <div className="compatibility-info">
                 <div className="compatibility-score">
-                  <span className="score-value">{Math.round(match.compatibilityScore)}%</span>
+                  <span className="score-value">
+                    {match.compatibilityScore && match.compatibilityScore > 0 
+                      ? `${Math.round(match.compatibilityScore * 100)}%`
+                      : 'N/A'
+                    }
+                  </span>
                   <span className="score-label">Compatibility</span>
                 </div>
               </div>
             </div>
 
             <div className="request-content">
+              <div className="match-metadata">
+                <div className="created-by">
+                  <span className="metadata-label">Match created by:</span>
+                  <span className="metadata-value">
+                    {match.createdByHR?.firstName} {match.createdByHR?.lastName} (HR)
+                  </span>
+                </div>
+              </div>
+
               {match.notes && (
                 <div className="hr-notes">
                   <h4>HR Notes:</h4>
@@ -108,30 +124,50 @@ const BuddyMatchRequests: React.FC<BuddyMatchRequestsProps> = ({
                 </div>
               )}
 
-              {/* Placeholder for newcomer details - would come from API */}
               <div className="newcomer-profile">
                 <h4>Newcomer Profile:</h4>
                 <div className="profile-details">
                   <div className="detail-item">
                     <span className="detail-label">Title:</span>
-                    <span className="detail-value">Loading...</span>
+                    <span className="detail-value">{match.newcomer?.title || 'N/A'}</span>
                   </div>
                   <div className="detail-item">
                     <span className="detail-label">Unit:</span>
-                    <span className="detail-value">Loading...</span>
+                    <span className="detail-value">{match.newcomer?.unit || 'N/A'}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="detail-label">Team:</span>
+                    <span className="detail-value">{match.newcomer?.team || 'N/A'}</span>
                   </div>
                   <div className="detail-item">
                     <span className="detail-label">Location:</span>
-                    <span className="detail-value">Loading...</span>
+                    <span className="detail-value">{match.newcomer?.location || 'N/A'}</span>
                   </div>
                   <div className="detail-item">
                     <span className="detail-label">Tech Stack:</span>
-                    <span className="detail-value">Loading...</span>
+                    <span className="detail-value">{match.newcomer?.techStack || 'N/A'}</span>
                   </div>
                   <div className="detail-item">
                     <span className="detail-label">Start Date:</span>
-                    <span className="detail-value">Loading...</span>
+                    <span className="detail-value">
+                      {match.newcomer?.startDate 
+                        ? new Date(match.newcomer.startDate).toLocaleDateString()
+                        : 'N/A'
+                      }
+                    </span>
                   </div>
+                  {match.newcomer?.interests && (
+                    <div className="detail-item">
+                      <span className="detail-label">Interests:</span>
+                      <span className="detail-value">{match.newcomer.interests}</span>
+                    </div>
+                  )}
+                  {match.newcomer?.languages && (
+                    <div className="detail-item">
+                      <span className="detail-label">Languages:</span>
+                      <span className="detail-value">{match.newcomer.languages}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 

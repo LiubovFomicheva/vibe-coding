@@ -100,6 +100,14 @@
         .btn-small { padding: 5px 10px; font-size: 0.8em; }
         .btn-secondary { background-color: #6c757d; }
         .btn-secondary:hover { background-color: #5a6268; }
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #495057;
+        }
         .btn-success { background-color: #28a745; }
         .btn-success:hover { background-color: #218838; }
         .btn-warning { background-color: #ffc107; color: #212529; }
@@ -237,6 +245,11 @@
             <button class="btn btn-small" onclick="checkAllEndpoints()">🔄 Test All Endpoints</button>
             <button class="btn btn-small btn-secondary" onclick="clearAllResults()">🗑️ Clear Results</button>
         </div>
+    </div>
+    
+    <!-- Connection Error Message -->
+    <div id="connectionError" style="display: none; background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-family: 'Source Sans Pro', Arial, sans-serif;">
+        <!-- Error content will be populated by JavaScript -->
     </div>
 
     <div class="demo-section">
@@ -432,10 +445,18 @@
         const API_BASE = 'http://localhost:5104/api';
         let isConnected = false;
 
-        // Check API connection on page load
+        // Check API connection on page load and periodically
         window.onload = function() {
             checkConnection();
             loadStatsData();
+            
+            // Check connection every 5 seconds
+            setInterval(() => {
+                checkConnection();
+                if (isConnected) {
+                    loadStatsData();
+                }
+            }, 5000);
         };
 
         async function checkConnection() {
@@ -448,13 +469,47 @@
                     isConnected = true;
                     indicator.classList.add('connected');
                     status.textContent = 'Connected to BuddyMatch API';
+                    
+                    // Hide error message when connected
+                    const errorDiv = document.getElementById('connectionError');
+                    if (errorDiv) {
+                        errorDiv.style.display = 'none';
+                    }
                 } else {
                     throw new Error('API responded with error');
                 }
             } catch (error) {
                 isConnected = false;
                 indicator.classList.remove('connected');
-                status.textContent = 'Disconnected - Please start backend server';
+                status.textContent = 'Disconnected - Backend server not running';
+                console.error('Connection error:', error);
+                
+                // Show detailed error message
+                const errorDiv = document.getElementById('connectionError');
+                if (errorDiv) {
+                    errorDiv.style.display = 'block';
+                    errorDiv.innerHTML = `
+                        <strong>🚨 Backend Not Running!</strong><br>
+                        <div style="margin-top: 10px;">
+                            <strong>To fix this:</strong><br>
+                            1. Open terminal in project root<br>
+                            2. Run: <code>start-backend.bat</code><br>
+                            3. Wait for "Application started" message<br>
+                            4. This page will auto-refresh when connected
+                        </div>
+                        <div style="margin-top: 15px; text-align: center;">
+                            <button onclick="window.open('start-backend.bat')" class="btn" style="background: #28a745; color: white; margin-right: 10px;">
+                                🚀 Try Start Backend
+                            </button>
+                            <button onclick="checkConnection()" class="btn" style="background: #007bff; color: white;">
+                                🔄 Check Again
+                            </button>
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                            Backend should be running on: <a href="http://localhost:5104/api/employees" target="_blank">http://localhost:5104/api/employees</a>
+                        </div>
+                    `;
+                }
             }
         }
 

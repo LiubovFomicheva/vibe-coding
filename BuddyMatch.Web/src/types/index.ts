@@ -228,6 +228,7 @@ export interface CreateMatchRequest {
   newcomerId: string;
   hrId: string;
   notes?: string;
+  compatibilityScore?: number;
 }
 
 export interface BuddyMatchRecommendation {

@@ -21,7 +21,7 @@
   justify-content: center;
   padding: 60px;
   text-align: center;
-  color: #dc3545;
+  color: var(--epam-error);
 }
 
 .error-icon {
@@ -32,10 +32,11 @@
 .error-help {
   margin-top: 20px;
   padding: 20px;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   border-radius: 6px;
   text-align: left;
   max-width: 400px;
+  color: var(--text-primary);
 }
 
 .error-help ul {
@@ -44,7 +45,8 @@
 }
 
 .error-help code {
-  background: #e9ecef;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
   padding: 2px 4px;
   border-radius: 3px;
 }
@@ -61,7 +63,7 @@
 
 .page-title {
   font-size: 2.5rem;
-  color: #0071CE;
+  color: var(--epam-primary);
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -74,7 +76,7 @@
 }
 
 .page-subtitle {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 1.2rem;
   margin-bottom: 0;
 }
@@ -89,7 +91,7 @@
 }
 
 .user-selector h3 {
-  color: #0071CE;
+  color: var(--epam-primary);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -98,8 +100,8 @@
 }
 
 .demo-badge {
-  background: #ffc107;
-  color: #333;
+  background: var(--epam-warning);
+  color: var(--epam-dark);
   padding: 4px 10px;
   border-radius: 4px;
   font-size: 0.8rem;
@@ -112,7 +114,7 @@
 }
 
 .category-title {
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 15px;
   display: flex;
   align-items: center;
@@ -143,7 +145,7 @@
 }
 
 .user-card:hover {
-  border-color: #0071CE;
+  border-color: var(--epam-primary);
   box-shadow: 0 4px 12px rgba(0,113,206,0.2);
   transform: translateY(-2px);
 }
@@ -151,7 +153,7 @@
 .user-card-avatar {
   width: 50px;
   height: 50px;
-  background: #0071CE;
+  background: var(--epam-primary);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -168,19 +170,19 @@
 
 .user-card-name {
   margin: 0 0 5px 0;
-  color: #333;
+  color: var(--text-primary);
   font-size: 1.1rem;
 }
 
 .user-card-title {
   margin: 0 0 5px 0;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
 .user-card-location {
   margin: 0 0 8px 0;
-  color: #888;
+  color: var(--text-tertiary);
   font-size: 0.85rem;
 }
 
@@ -239,7 +241,7 @@
 .stat-icon {
   width: 60px;
   height: 60px;
-  background: #0071CE;
+  background: var(--epam-primary);
   color: white;
   border-radius: 12px;
   display: flex;
@@ -256,13 +258,13 @@
 .stat-value {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #333;
+  color: var(--text-primary);
   line-height: 1;
   margin-bottom: 5px;
 }
 
 .stat-label {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -295,7 +297,7 @@
 .section-icon {
   width: 45px;
   height: 45px;
-  background: #0071CE;
+  background: var(--epam-primary);
   color: white;
   border-radius: 8px;
   display: flex;
@@ -306,7 +308,7 @@
 
 .section-title {
   font-size: 1.4rem;
-  color: #333;
+  color: var(--text-primary);
   margin: 0;
   font-weight: 600;
 }
@@ -322,7 +324,7 @@
 
 .user-info p {
   margin: 0 0 10px 0;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 /* Responsive */
@@ -363,4 +365,35 @@
   .stat-value {
     font-size: 2rem;
   }
+}
+
+/* Dark theme button styles */
+.dashboard .btn-outline {
+  border: 2px solid var(--epam-primary);
+  background: transparent;
+  color: var(--epam-primary);
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.dashboard .btn-outline:hover {
+  background: var(--epam-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 113, 206, 0.3);
+}
+
+[data-theme="dark"] .dashboard .btn-outline {
+  border-color: var(--epam-primary);
+  color: var(--epam-primary);
+  background: transparent;
+}
+
+[data-theme="dark"] .dashboard .btn-outline:hover {
+  background: var(--epam-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 113, 206, 0.4);
 }

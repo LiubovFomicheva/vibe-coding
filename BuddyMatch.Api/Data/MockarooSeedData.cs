@@ -7,14 +7,13 @@ namespace BuddyMatch.Api.Data
     {
         public static async Task InitializeAsync(BuddyMatchContext context)
         {
-            // Ensure database is created
+            // For demo purposes, always refresh the data with updated dates
+            // In production, you'd want to be more careful about this
+            await context.Database.EnsureDeletedAsync();
             await context.Database.EnsureCreatedAsync();
             
-            // Check if data already exists
-            if (await context.Employees.AnyAsync())
-            {
-                return; // Database has been seeded
-            }
+            // Always seed fresh data (removed the check for existing data)
+            // This ensures that updated mock dates are always used
             
             // Create HR users (3 realistic HR professionals)
             var hrUsers = new List<Employee>
@@ -217,7 +216,7 @@ namespace BuddyMatch.Api.Data
                     Role = EmployeeRole.Employee,
                     Location = "New York, NY",
                     TechStack = ".NET, C#, JavaScript, HTML, CSS, SQL",
-                    StartDate = DateTime.UtcNow.AddMonths(-2),
+                    StartDate = DateTime.UtcNow.AddDays(-3), // Started 3 days ago - CRITICAL
                     Languages = "English, Polish, German",
                     Interests = "Web development, Learning new technologies, Open source, Coding challenges"
                 },
@@ -233,7 +232,7 @@ namespace BuddyMatch.Api.Data
                     Role = EmployeeRole.Employee,
                     Location = "San Francisco, CA",
                     TechStack = "React, TypeScript, JavaScript, CSS, Figma, Git",
-                    StartDate = DateTime.UtcNow.AddMonths(-1),
+                    StartDate = DateTime.UtcNow.AddDays(2), // Starts in 2 days - URGENT
                     Languages = "English, Hindi, Gujarati",
                     Interests = "Frontend frameworks, UI/UX design, Mobile development, Design patterns"
                 },
@@ -249,7 +248,7 @@ namespace BuddyMatch.Api.Data
                     Role = EmployeeRole.Employee,
                     Location = "Austin, TX",
                     TechStack = "SQL, Python, Tableau, Excel, Power BI, R",
-                    StartDate = DateTime.UtcNow.AddMonths(-3),
+                    StartDate = DateTime.UtcNow.AddDays(5), // Starts in 5 days - HIGH
                     Languages = "English, French, Spanish",
                     Interests = "Data analysis, Statistics, Machine learning, Data visualization, Business intelligence"
                 },
@@ -265,7 +264,7 @@ namespace BuddyMatch.Api.Data
                     Role = EmployeeRole.Employee,
                     Location = "Miami, FL",
                     TechStack = "Node.js, JavaScript, MongoDB, Express, REST APIs, Git",
-                    StartDate = DateTime.UtcNow.AddMonths(-1),
+                    StartDate = DateTime.UtcNow.AddDays(10), // Starts in 10 days - MEDIUM
                     Languages = "English, Spanish, Portuguese",
                     Interests = "Backend development, API design, Database design, Cloud computing"
                 },
@@ -281,7 +280,7 @@ namespace BuddyMatch.Api.Data
                     Role = EmployeeRole.Employee,
                     Location = "Seattle, WA",
                     TechStack = "Docker, Git, Linux, Bash, Python, Jenkins",
-                    StartDate = DateTime.UtcNow.AddMonths(-2),
+                    StartDate = DateTime.UtcNow.AddDays(1), // Starts tomorrow - URGENT
                     Languages = "English, Arabic, French",
                     Interests = "DevOps practices, Automation, Cloud platforms, Containerization"
                 },
@@ -297,7 +296,7 @@ namespace BuddyMatch.Api.Data
                     Role = EmployeeRole.Employee,
                     Location = "Los Angeles, CA",
                     TechStack = "SQL, Python, Tableau, Google Analytics, Excel, JIRA",
-                    StartDate = DateTime.UtcNow.AddMonths(-3),
+                    StartDate = DateTime.UtcNow.AddDays(18), // Starts in 18 days - LOW
                     Languages = "English, Mandarin, Cantonese",
                     Interests = "Product analytics, User behavior, A/B testing, Market research"
                 },
@@ -313,7 +312,7 @@ namespace BuddyMatch.Api.Data
                     Role = EmployeeRole.Employee,
                     Location = "Chicago, IL",
                     TechStack = "Manual Testing, Selenium, Postman, JIRA, TestRail, Git",
-                    StartDate = DateTime.UtcNow.AddMonths(-1),
+                    StartDate = DateTime.UtcNow.AddDays(7), // Starts in 1 week - HIGH
                     Languages = "English, Danish, Swedish",
                     Interests = "Software testing, Quality assurance, Test automation, Bug tracking"
                 }

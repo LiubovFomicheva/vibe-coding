@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 809,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -39,30 +39,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MatchingService.cs",
-              "DocumentMoniker": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Services\\MatchingService.cs",
-              "RelativeDocumentMoniker": "BuddyMatch.Api\\Services\\MatchingService.cs",
-              "ToolTip": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Services\\MatchingService.cs",
-              "RelativeToolTip": "BuddyMatch.Api\\Services\\MatchingService.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAA3wAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T18:50:28.854Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MockarooSeedData.cs",
-              "DocumentMoniker": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Data\\MockarooSeedData.cs",
-              "RelativeDocumentMoniker": "BuddyMatch.Api\\Data\\MockarooSeedData.cs",
-              "ToolTip": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Data\\MockarooSeedData.cs",
-              "RelativeToolTip": "BuddyMatch.Api\\Data\\MockarooSeedData.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T18:50:22.069Z"
             },
             {
               "$type": "Document",
@@ -79,6 +55,30 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MockarooSeedData.cs",
+              "DocumentMoniker": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Data\\MockarooSeedData.cs",
+              "RelativeDocumentMoniker": "BuddyMatch.Api\\Data\\MockarooSeedData.cs",
+              "ToolTip": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Data\\MockarooSeedData.cs",
+              "RelativeToolTip": "BuddyMatch.Api\\Data\\MockarooSeedData.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T18:50:22.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MatchingService.cs",
+              "DocumentMoniker": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Services\\MatchingService.cs",
+              "RelativeDocumentMoniker": "BuddyMatch.Api\\Services\\MatchingService.cs",
+              "ToolTip": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Services\\MatchingService.cs",
+              "RelativeToolTip": "BuddyMatch.Api\\Services\\MatchingService.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAA3wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T18:50:28.854Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\LiubovFomicheva\\source\\repos\\vibe-coding\\BuddyMatch.Api\\Program.cs",
@@ -88,6 +88,10 @@
               "ViewState": "AgIAAAwAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T15:36:30.252Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
               "$type": "Bookmark",

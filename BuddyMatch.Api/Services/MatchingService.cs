@@ -120,9 +120,16 @@ namespace BuddyMatch.Api.Services
             return Math.Min(1.0, Math.Max(0.0, score));
         }
         
-        public async Task<Models.BuddyMatch> CreateMatchAsync(Guid buddyId, Guid newcomerId, Guid hrId, string notes = "")
+        public async Task<Models.BuddyMatch> CreateMatchAsync(Guid buddyId, Guid newcomerId, Guid hrId, string notes = "", double? compatibilityScore = null)
         {
-            var compatibilityScore = await CalculateCompatibilityScoreAsync(buddyId, newcomerId);
+            // Use provided compatibility score if available, otherwise calculate it
+            var finalCompatibilityScore = compatibilityScore ?? await CalculateCompatibilityScoreAsync(buddyId, newcomerId);
+            
+            // Convert from percentage (0-100) to decimal (0-1) if needed
+            if (finalCompatibilityScore > 1.0)
+            {
+                finalCompatibilityScore = finalCompatibilityScore / 100.0;
+            }
             
             var match = new Models.BuddyMatch
             {
@@ -131,7 +138,7 @@ namespace BuddyMatch.Api.Services
                 NewcomerId = newcomerId,
                 CreatedByHRId = hrId,
                 Status = MatchStatus.Pending,
-                CompatibilityScore = compatibilityScore,
+                CompatibilityScore = finalCompatibilityScore,
                 Notes = notes,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
@@ -140,8 +147,8 @@ namespace BuddyMatch.Api.Services
             _context.BuddyMatches.Add(match);
             await _context.SaveChangesAsync();
             
-            _logger.LogInformation("Created match {MatchId} between buddy {BuddyId} and newcomer {NewcomerId} with score {Score}", 
-                match.Id, buddyId, newcomerId, compatibilityScore);
+            _logger.LogInformation("Created match {MatchId} between buddy {BuddyId} and newcomer {NewcomerId} with score {Score} (provided: {ProvidedScore})", 
+                match.Id, buddyId, newcomerId, finalCompatibilityScore, compatibilityScore);
             
             return match;
         }

@@ -6,7 +6,7 @@ namespace BuddyMatch.Api.Services
     {
         Task<List<BuddyMatchRecommendation>> GetBuddyRecommendationsAsync(Guid newcomerId, int maxRecommendations = 5);
         Task<double> CalculateCompatibilityScoreAsync(Guid buddyId, Guid newcomerId);
-        Task<Models.BuddyMatch> CreateMatchAsync(Guid buddyId, Guid newcomerId, Guid hrId, string notes = "");
+        Task<Models.BuddyMatch> CreateMatchAsync(Guid buddyId, Guid newcomerId, Guid hrId, string notes = "", double? compatibilityScore = null);
         Task<bool> AcceptMatchAsync(Guid matchId, Guid buddyId);
         Task<bool> RejectMatchAsync(Guid matchId, Guid buddyId, string reason = "");
     }

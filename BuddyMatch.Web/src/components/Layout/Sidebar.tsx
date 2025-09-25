@@ -10,11 +10,11 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const { currentUser } = useUser();
 
-  const navigationItems = [
+  const navigationItems = [ 
     {
       path: '/',
-      label: 'Dashboard',
-      icon: '📊',
+      label: 'Start',
+      icon: '🚀' ,
       roles: [EmployeeRole.HR, EmployeeRole.Employee]
     },
     {
@@ -26,7 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     {
       path: '/buddies',
       label: 'Buddy Profiles',
-      icon: '🎯',
+      icon: '👤',
       roles: [EmployeeRole.HR, EmployeeRole.Employee]
     },
     {
@@ -37,38 +37,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     },
     {
       path: '/buddy-dashboard',
-      label: 'Buddy Dashboard',
+      label: 'Dashboard',
       icon: '🎯',
       roles: [EmployeeRole.Employee]
     },
     {
-      path: '/buddy-catalog',
-      label: 'Buddy Catalog',
-      icon: '📋',
-      roles: [EmployeeRole.HR, EmployeeRole.Employee]
-    },
-    {
-      path: '/messages',
-      label: 'Messages',
-      icon: '💬',
-      roles: [EmployeeRole.HR, EmployeeRole.Employee]
-    },
-    {
       path: '/gamification',
       label: 'Gamification',
-      icon: '🏆',
-      roles: [EmployeeRole.HR, EmployeeRole.Employee]
-    },
-    {
-      path: '/analytics',
-      label: 'Analytics',
-      icon: '📈',
-      roles: [EmployeeRole.HR]
-    },
-    {
-      path: '/api-test',
-      label: 'API Test',
-      icon: '🔧',
+      icon: '🎮',
       roles: [EmployeeRole.HR, EmployeeRole.Employee]
     }
   ];
@@ -84,13 +60,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       top: '70px',
       width: isOpen ? '280px' : '80px',
       height: 'calc(100vh - 70px)',
-      background: 'var(--glass-bg)',
+      background: 'var(--sidebar-bg, var(--glass-bg))',
       backdropFilter: 'blur(20px)',
-      borderRight: '1px solid var(--glass-border)',
+      borderRight: '1px solid var(--sidebar-border, var(--glass-border))',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       overflow: 'hidden',
       zIndex: 1000,
-      boxShadow: '4px 0 20px rgba(0, 0, 0, 0.05)'
+      boxShadow: 'var(--sidebar-shadow, 4px 0 20px rgba(0, 0, 0, 0.05))'
     }}>
       <nav style={{ padding: '20px 0' }}>
         {filteredItems.map((item) => (
@@ -103,7 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
               gap: '16px',
               padding: '16px 24px',
               margin: '4px 12px',
-              color: isActive ? '#ffffff' : 'var(--text-tertiary)',
+              color: isActive ? '#ffffff' : 'var(--sidebar-text, var(--text-primary))',
               textDecoration: 'none',
               borderRadius: '16px',
               background: isActive 
@@ -117,15 +93,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
             })}
             onMouseEnter={(e) => {
               if (!e.currentTarget.classList.contains('active')) {
-                e.currentTarget.style.background = 'rgba(0, 113, 206, 0.1)';
-                e.currentTarget.style.color = '#0071CE';
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
                 e.currentTarget.style.transform = 'translateX(4px)';
               }
             }}
             onMouseLeave={(e) => {
               if (!e.currentTarget.classList.contains('active')) {
                 e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = 'var(--text-tertiary)';
                 e.currentTarget.style.transform = 'translateX(0)';
               }
             }}

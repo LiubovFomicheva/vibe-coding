@@ -80,6 +80,7 @@ public class MatchesController : ControllerBase
             var matches = await _context.BuddyMatches
                 .Include(m => m.Buddy)
                 .Include(m => m.Newcomer)
+                .Include(m => m.CreatedByHR)
                 .Where(m => m.BuddyId == buddyId)
                 .OrderByDescending(m => m.CreatedAt)
                 .ToListAsync();

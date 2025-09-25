@@ -78,6 +78,19 @@
   --gradient-success: linear-gradient(135deg, #10B981, #059669);
   --gradient-warm: linear-gradient(135deg, #F59E0B, #F97316);
   --gradient-cool: linear-gradient(135deg, #06B6D4, #6366F1);
+  
+  /* Dark Header & Sidebar */
+  --header-bg: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+  --header-border: rgba(75, 85, 99, 0.3);
+  --header-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --header-text: #FFFFFF;
+  --header-text-secondary: #9CA3AF;
+  --header-text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  
+  --sidebar-bg: linear-gradient(180deg, #1F2937 0%, #111827 100%);
+  --sidebar-border: rgba(75, 85, 99, 0.3);
+  --sidebar-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  --sidebar-text: #E5E7EB;
 }
 
 /* Global Variables */

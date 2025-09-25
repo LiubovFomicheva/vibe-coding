@@ -3,6 +3,7 @@ import { useUser } from '../../contexts/UserContext';
 import { BuddyProfile, EmployeeRole } from '../../types';
 import { buddyApi } from '../../services/api';
 import BuddySearchFilter from './BuddySearchFilter';
+import BuddyProfileModal from '../UI/BuddyProfileModal';
 import './BuddyCatalog.css';
 
 const BuddyCatalog: React.FC = () => {
@@ -11,6 +12,8 @@ const BuddyCatalog: React.FC = () => {
   const [filteredProfiles, setFilteredProfiles] = useState<BuddyProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedBuddyProfile, setSelectedBuddyProfile] = useState<BuddyProfile | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     loadBuddyProfiles();
@@ -57,6 +60,16 @@ const BuddyCatalog: React.FC = () => {
     if (!profile.employee?.startDate) return 0;
     const years = (new Date().getTime() - new Date(profile.employee.startDate).getTime()) / (1000 * 60 * 60 * 24 * 365);
     return Math.round(years * 10) / 10;
+  };
+
+  const handleViewProfile = (profile: BuddyProfile) => {
+    setSelectedBuddyProfile(profile);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedBuddyProfile(null);
   };
 
   if (!currentUser || currentUser.role !== EmployeeRole.HR) {
@@ -222,7 +235,10 @@ const BuddyCatalog: React.FC = () => {
                       <span className="btn-icon">🤝</span>
                       Create Match
                     </button>
-                    <button className="btn btn-secondary">
+                    <button 
+                      className="btn btn-secondary"
+                      onClick={() => handleViewProfile(profile)}
+                    >
                       <span className="btn-icon">👁️</span>
                       View Details
                     </button>
@@ -247,6 +263,15 @@ const BuddyCatalog: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Buddy Profile Modal */}
+      {selectedBuddyProfile && (
+        <BuddyProfileModal
+          buddyProfile={selectedBuddyProfile}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };

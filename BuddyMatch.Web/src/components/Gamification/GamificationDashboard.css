@@ -1,0 +1,395 @@
+/* Gamification Dashboard Styles */
+.gamification-dashboard {
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  color: #0071CE;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.page-icon {
+  font-size: 2rem;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Game Profile Overview */
+.game-profile-overview {
+  background: linear-gradient(135deg, #f8fafe, #e3f2fd);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 30px;
+  border: 2px solid #e3f2fd;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* Level Display */
+.level-display {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.level-icon {
+  font-size: 3rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.level-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.level-info p {
+  margin: 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Points Display */
+.points-display {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+
+.points-total, .points-monthly {
+  text-align: center;
+}
+
+.points-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0071CE;
+  line-height: 1;
+}
+
+.points-monthly .points-number {
+  font-size: 2rem;
+  color: #28a745;
+}
+
+.points-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+/* Streak Display */
+.streak-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.streak-icon {
+  font-size: 2rem;
+}
+
+.streak-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fd7e14;
+  line-height: 1;
+}
+
+.streak-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Gamification Tabs */
+.gamification-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e0e6ed;
+  overflow-x: auto;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.tab-button:hover {
+  background: #f8f9fa;
+  color: #0071CE;
+}
+
+.tab-button.active {
+  background: #0071CE;
+  color: white;
+  transform: translateY(2px);
+}
+
+.tab-icon {
+  font-size: 1.1rem;
+}
+
+/* Tab Content */
+.tab-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 400px;
+  padding: 32px;
+}
+
+/* Overview Content */
+.overview-content {
+  padding: 0;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.recent-badges, .recent-achievements {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
+  border: 2px solid #e9ecef;
+}
+
+.recent-badges h3, .recent-achievements h3 {
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.section-icon {
+  font-size: 1.3rem;
+}
+
+/* States */
+.loading, .error, .access-denied, .no-game-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0071CE;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.access-denied-icon, .error-icon, .no-profile-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.access-denied h3, .error h3, .no-game-profile h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.access-denied p, .error p, .no-game-profile p {
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: #0071CE;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #005ba3;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #0071CE;
+  border: 2px solid #0071CE;
+}
+
+.btn-outline:hover {
+  background: #0071CE;
+  color: white;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .profile-stats {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+  
+  .points-display {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gamification-dashboard {
+    padding: 20px;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .game-profile-overview {
+    padding: 24px;
+  }
+  
+  .profile-stats {
+    gap: 20px;
+  }
+  
+  .level-display {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .level-icon {
+    font-size: 2.5rem;
+  }
+  
+  .points-display {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .points-number {
+    font-size: 2rem;
+  }
+  
+  .points-monthly .points-number {
+    font-size: 1.8rem;
+  }
+  
+  .streak-display {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .gamification-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .tab-button {
+    padding: 12px 16px;
+    min-width: auto;
+  }
+  
+  .tab-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gamification-dashboard {
+    padding: 15px;
+  }
+  
+  .tab-content {
+    padding: 16px;
+  }
+  
+  .recent-badges, .recent-achievements {
+    padding: 16px;
+  }
+}

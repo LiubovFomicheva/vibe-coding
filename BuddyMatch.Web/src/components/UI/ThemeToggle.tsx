@@ -1,42 +1,61 @@
-import React from 'react';
-import useTheme from '../../hooks/useTheme';
+import React, { useState, useEffect } from 'react';
 
 const ThemeToggle: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Проверяем сохраненную тему из localStorage
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    setIsDark(shouldUseDark);
+    
+    // Применяем тему к документу
+    document.documentElement.setAttribute('data-theme', shouldUseDark ? 'dark' : 'light');
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    
+    const themeValue = newTheme ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', themeValue);
+    localStorage.setItem('theme', themeValue);
+  };
 
   return (
     <button
       onClick={toggleTheme}
       style={{
-        background: 'rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
-        borderRadius: '50%',
+        background: isDark 
+          ? 'linear-gradient(135deg, #374151, #1F2937)' 
+          : 'linear-gradient(135deg, #F59E0B, #D97706)',
+        border: 'none',
+        borderRadius: '12px',
+        color: 'white',
+        fontSize: '18px',
+        cursor: 'pointer',
+        padding: '12px',
         width: '48px',
         height: '48px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        cursor: 'pointer',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        fontSize: '1.25rem',
-        color: 'var(--text-primary)',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+        transition: 'all 0.3s ease',
+        boxShadow: isDark 
+          ? '0 4px 12px rgba(55, 65, 81, 0.3)' 
+          : '0 4px 12px rgba(245, 158, 11, 0.3)',
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'scale(1.1) rotate(180deg)';
-        e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 113, 206, 0.3)';
-        e.currentTarget.style.background = 'rgba(0, 113, 206, 0.2)';
+        e.currentTarget.style.transform = 'translateY(-2px)';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
-        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+        e.currentTarget.style.transform = 'translateY(0)';
       }}
-      title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      title={`Switch to ${isDark ? 'light' : 'dark'} theme`}
     >
-      {theme === 'light' ? '🌙' : '☀️'}
+      {isDark ? '☀️' : '🌙'}
     </button>
   );
 };

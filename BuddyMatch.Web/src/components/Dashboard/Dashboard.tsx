@@ -6,6 +6,7 @@ import UserSelector from './UserSelector';
 import StatsCards from './StatsCards';
 import QuickActions from './QuickActions';
 import RecentActivity from './RecentActivity';
+import NewcomerDashboard from './NewcomerDashboard';
 import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
@@ -93,7 +94,7 @@ const Dashboard: React.FC = () => {
       <div className="page-header glass-card hover-lift">
         <h1 className="page-title gradient-text">
           <span className="page-icon">📊</span>
-          BuddyMatch Dashboard
+          AI Powered BuddyMatch
         </h1>
         <p className="page-subtitle">
           Welcome to your AI-powered buddy matching platform
@@ -111,6 +112,8 @@ const Dashboard: React.FC = () => {
             onUserSelect={handleUserSelect}
           />
         </div>
+      ) : currentUser.isNewcomer ? (
+        <NewcomerDashboard />
       ) : (
         <div className="dashboard-content">
           <div className="dashboard-welcome">
